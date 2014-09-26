@@ -10,4 +10,10 @@
   = f.simple_fields_for :student do |s|
     = s.input :name, required: false
 
+  = f.simple_fields_for :school do |s|
+    = s.input :english_name, required: false
+    = s.input :chinese_name, required: false
+
+  = text_field_tag :categories, id: "", class: "school_document[categories]"
+
   = f.button :submit

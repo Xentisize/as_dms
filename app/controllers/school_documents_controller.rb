@@ -8,6 +8,7 @@ class SchoolDocumentsController < ApplicationController
     @school_document = SchoolDocument.new
     @school_document.build_subject
     @school_document.build_student
+    @school_document.build_school
   end
 
   def create
