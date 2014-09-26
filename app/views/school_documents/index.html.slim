@@ -1,0 +1,18 @@
+
+table
+  thead
+    td Name
+    td Year
+    td Term
+    td Grade
+    td Subject
+    td Contributor
+  tbody
+- @school_documents.each do |sd|
+  tr
+    = sd.name
+    = sd.year
+    = sd.term
+    = sd.grade
+    = sd.subject.subject
+    = sd.student.name

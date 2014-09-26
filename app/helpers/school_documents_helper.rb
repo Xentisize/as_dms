@@ -1,0 +1,2 @@
+module SchoolDocumentsHelper
+end
