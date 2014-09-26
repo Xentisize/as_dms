@@ -1,14 +1,13 @@
 
 = simple_form_for @school_document do |f|
-  = f.input :name
+  / # = f.input :name
   = f.input :year
   = f.input :term
   = f.input :grade
 
-  = f.simple_fields_for :subject do |s|
-    = s.input :subject
+  = f.association :subject
 
   = f.simple_fields_for :student do |s|
-    = s.input :name
+    = s.input :name, required: false
 
   = f.button :submit

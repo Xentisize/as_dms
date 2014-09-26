@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'uploads/index'
+
   resources :school_documents
   # get 'school_documents/index'
 
