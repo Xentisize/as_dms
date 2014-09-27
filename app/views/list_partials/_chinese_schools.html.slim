@@ -1,0 +1,4 @@
+datalist id="chinese-schools-list"
+  - cache School.last do
+    - School.all.each do |s|
+      option value="#{s.chinese_name}"

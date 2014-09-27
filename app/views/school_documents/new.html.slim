@@ -1,6 +1,7 @@
 
 = simple_form_for @school_document do |f|
   / # = f.input :name
+  = f.file_field :file
   = f.input :year
   = f.input :term
   = f.input :grade
@@ -8,16 +9,20 @@
   = f.association :subject
 
   = f.simple_fields_for :student do |s|
-    = s.input :name, required: false
+    = s.input :name, required: false, input_html: { list: 'students-list' }
+    = render 'list_partials/students'
 
   = f.simple_fields_for :school do |s|
-    = s.input :english_name, required: false
-    = s.input :chinese_name, required: false
+    = s.input :english_name, required: false, input_html: { list: 'english-schools-list' }
+    = render 'list_partials/english_schools'
+    = s.input :chinese_name, required: false, input_html: { list: 'chinese-schools-list' }
+    = render 'list_partials/chinese_schools'
 
   div class="input string optional"
     label class="string optional" for="school_document_categories_name" Name
-    input class="string optional school_document_categories" name="school_document[categories][1][name]" type="text"
+    input class="string optional school_document_categories" name="school_document[categories][1][name]" type="text" list="categories-list"
     = link_to "add", "#", id: "new_category"
+    = render 'list_partials/categories'
 
   br
   = f.button :submit

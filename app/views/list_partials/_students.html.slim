@@ -1,0 +1,4 @@
+datalist id="students-list"
+  - cache Student.last do
+    - Student.all.each do |s|
+      option value="#{s.name}"

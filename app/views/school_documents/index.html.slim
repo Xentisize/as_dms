@@ -8,6 +8,7 @@ table
     td Subject
     td Contributor
     td Category
+    td File
   tbody
     - @school_documents.each do |sd|
       tr
@@ -18,3 +19,5 @@ table
         td = sd.subject.subject
         td = sd.student.name
         td = sd.categories.first.name
+        td = link_to "open", "#{sd.file.url}"
+        td = link_to "open 2", "#{sd.file_location}"

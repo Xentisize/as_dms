@@ -37,6 +37,10 @@ gem 'slim-rails'
 gem 'bh'
 gem 'bootstrap-sass'
 gem 'simple_form'
+gem 'carrierwave'
+gem 'oily_png'
+gem 'rqrcode_png'
+gem 'rmagick'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
