@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140926181212) do
+ActiveRecord::Schema.define(version: 20140927024431) do
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories_school_documents", id: false, force: true do |t|
+    t.integer "category_id"
+    t.integer "school_document_id"
+  end
 
   create_table "school_documents", force: true do |t|
     t.string   "name"
@@ -22,12 +33,10 @@ ActiveRecord::Schema.define(version: 20140926181212) do
     t.integer  "grade"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "school_id_id"
     t.integer  "school_id"
   end
 
   add_index "school_documents", ["school_id"], name: "index_school_documents_on_school_id"
-  add_index "school_documents", ["school_id_id"], name: "index_school_documents_on_school_id_id"
 
   create_table "schools", force: true do |t|
     t.string   "english_name"

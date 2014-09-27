@@ -7,12 +7,14 @@ table
     td Grade
     td Subject
     td Contributor
+    td Category
   tbody
-- @school_documents.each do |sd|
-  tr
-    = sd.name
-    = sd.year
-    = sd.term
-    = sd.grade
-    = sd.subject.subject
-    = sd.student.name
+    - @school_documents.each do |sd|
+      tr
+        td = sd.name
+        td = sd.year
+        td = sd.term
+        td = sd.grade
+        td = sd.subject.subject
+        td = sd.student.name
+        td = sd.categories.first.name

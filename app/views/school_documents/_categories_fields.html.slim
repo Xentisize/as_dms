@@ -1,0 +1,4 @@
+= simple_form_for @school_document do |f|
+  = f.simple_fields_for :categories do |c|
+    = c.input :name, required: false
+  / # = link_to "Add", "new_category_path", remote: :true

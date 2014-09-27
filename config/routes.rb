@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   get 'uploads/index'
+  get 'school_documents/new_category_field', to: 'school_documents#new_category_field'
+
+  # get 'school_documents/new_category_path', to: "school_documents#new_category_field"
 
   resources :school_documents
   # get 'school_documents/index'

@@ -14,6 +14,10 @@
     = s.input :english_name, required: false
     = s.input :chinese_name, required: false
 
-  = text_field_tag :categories, id: "", class: "school_document[categories]"
+  div class="input string optional"
+    label class="string optional" for="school_document_categories_name" Name
+    input class="string optional school_document_categories" name="school_document[categories][1][name]" type="text"
+    = link_to "add", "#", id: "new_category"
 
+  br
   = f.button :submit
