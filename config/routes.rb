@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'uploads/index'
   get 'school_documents/new_category_field', to: 'school_documents#new_category_field'
+  get 'queries/schools/:school', to: 'queries#match_school_name_from_english_or_chinese'
 
   # get 'school_documents/new_category_path', to: "school_documents#new_category_field"
 

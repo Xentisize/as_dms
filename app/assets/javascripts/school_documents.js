@@ -7,3 +7,28 @@ $(function() {
     $(new_field).insertAfter(".school_document_categories:last");
   });
 });
+
+// Match the english / chinese school name when blurred
+$(function() {
+  $("#school_document_school_english_name").blur(function() {
+    // The english school name is not empty while there is no input in chinese school name
+    if($(this).val() !== "" && $("#school_document_school_chinese_name").val() === "") {
+      var request_url = "/queries/schools/" + $(this).val() + ".json";
+      $.getJSON(request_url, function(data) {
+        $("#school_document_school_chinese_name").val(data["chinese_name"]);
+      });
+    }
+  });
+});
+
+$(function() {
+  $("#school_document_school_chinese_name").blur(function() {
+    // The english school name is not empty while there is no input in chinese school name
+    if($(this).val() !== "" && $("#school_document_school_english_name").val() === "") {
+      var request_url = "/queries/schools/" + $(this).val() + ".json";
+      $.getJSON(request_url, function(data) {
+        $("#school_document_school_english_name").val(data["english_name"]);
+      });
+    }
+  });
+});
