@@ -9,6 +9,7 @@ class SchoolDocumentsController < ApplicationController
     @school_document.build_subject
     @school_document.build_student
     @school_document.build_school
+    @school_document.build_format
   end
 
   def create
@@ -16,9 +17,12 @@ class SchoolDocumentsController < ApplicationController
 
     unless school_document_subject_params[:subject_id].blank?
       @school_document.subject = Subject.find_or_create_by(id: school_document_subject_params[:subject_id])
-    else
-      @school_document.subject = Subject.find_or_create_by(name: "Not Specified")
     end
+
+    unless school_document_format_params[:format_id].blank?
+      @school_document.format = Format.find_by(id: school_document_format_params[:format_id])
+    end
+
     unless school_document_student_params[:student][:name].blank?
       @school_document.student = Student.find_or_create_by(name: school_document_student_params[:student][:name])
     else
@@ -90,4 +94,7 @@ class SchoolDocumentsController < ApplicationController
     params.require(:school_document).permit(:school => [:english_name, :chinese_name])
   end
 
+  def school_document_format_params
+    params.require(:school_document).permit(:format_id)
+  end
 end

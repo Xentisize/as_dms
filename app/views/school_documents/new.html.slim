@@ -7,6 +7,7 @@
   = f.input :grade
 
   = f.association :subject
+  = f.association :format
 
   = f.simple_fields_for :student do |s|
     = s.input :name, required: false, input_html: { list: 'students-list' }
