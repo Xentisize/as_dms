@@ -62,7 +62,7 @@ module WatermarkDocument
   end
 
   def tmp_to_png
-    `convert -density 200 -size 1024x800 #{@tmp_file_path} #{@png_path}/#{@tmp_file_identifier}-%03d.png`
+    `convert -density 200 -size 800x600 #{@tmp_file_path} #{@png_path}/#{@tmp_file_identifier}-%03d.png`
   end
 
   def
@@ -107,10 +107,10 @@ module WatermarkDocument
     label_y_coord = qr_y_coord
 
     png_files = Dir.glob("#{@png_path}/*.*")
-    image_optim = ImageOptim.new
-    png_files.each do |png|
-      image_optim.optimize_image!(png)
-    end
+    # image_optim = ImageOptim.new
+    # png_files.each do |png|
+    #   image_optim.optimize_image!(png)
+    # end
     qr_file = ChunkyPNG::Image.from_file(@qr_path.join("#{@tmp_file_identifier}-qr.png"))
 
     label_file = @label_path.join("#{@tmp_file_identifier}-label.png")

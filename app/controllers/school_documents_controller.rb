@@ -37,6 +37,14 @@ class SchoolDocumentsController < ApplicationController
       @school_document.categories << Category.find_or_create_by(name: "Not Specified")
     end
 
+    unless school_document_question_types_params[:question_types].blank?
+      school_document_question_types_params[:question_types].values.each do |q|
+        @school_document.question_types << QuestionType.find_or_create_by(name: q[:name])
+      end
+    else
+      @school_document.question_types << QuestionType.find_or_create_by(name: "Not specified")
+    end
+
     unless school_document_school_params[:school][:english_name].blank? && school_document_school_params[:school][:chinese_name].blank?
       chinese_school = School.find_by(chinese_name: school_document_school_params[:school][:chinese_name])
       if chinese_school.blank?
@@ -47,8 +55,8 @@ class SchoolDocumentsController < ApplicationController
       else
         if chinese_school.english_name == school_document_school_params[:school][:english_name]
           @school_document.school = chinese_school
-        else
-          redirect_to new_school_document_path
+        # else
+        #   redirect_to new_school_document_path
         end
       end
     end
@@ -92,6 +100,10 @@ class SchoolDocumentsController < ApplicationController
 
   def school_document_school_params
     params.require(:school_document).permit(:school => [:english_name, :chinese_name])
+  end
+
+  def school_document_question_types_params
+    params.require(:school_document).permit(:question_types => [:name])
   end
 
   def school_document_format_params

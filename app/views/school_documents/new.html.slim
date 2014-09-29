@@ -20,10 +20,16 @@
     = render 'list_partials/chinese_schools'
 
   div class="input string optional"
-    label class="string optional" for="school_document_categories_name" Name
+    label class="string optional" for="school_document_categories_name" Category
     input class="string optional school_document_categories" name="school_document[categories][1][name]" type="text" list="categories-list"
     = link_to "add", "#", id: "new_category"
     = render 'list_partials/categories'
+
+  div class="input string optional"
+    label class="string optional" for="school_document_question_types_name" Question Type
+    input class="string optional school_document_question_types" name="school_document[question_types][1][name]" type="text" list="question_types-list"
+    = link_to "add", "#", id: "new_question_type"
+    = render 'list_partials/question_types'
 
   br
   = f.button :submit

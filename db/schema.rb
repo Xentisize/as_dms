@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140929063113) do
+ActiveRecord::Schema.define(version: 20140929074309) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -44,6 +44,25 @@ ActiveRecord::Schema.define(version: 20140929063113) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "public_exams", force: true do |t|
+    t.integer  "year"
+    t.integer  "format_id"
+    t.string   "subject"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "question_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "question_types_school_documents", force: true do |t|
+    t.integer "question_type_id"
+    t.integer "school_document_id"
   end
 
   create_table "school_documents", force: true do |t|

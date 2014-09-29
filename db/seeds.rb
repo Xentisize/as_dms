@@ -9,6 +9,7 @@
 subjects = %w(Chinese English Mathematics Physics Chemistry Biology IS LS Economics Accounts)
 students = ["Jason Law", "Russell Mak", "Andix Chan", "Karinna Lai"]
 formats = ["Worksheet", "Test", "Exam", "Mock", "DSE", "HKCEE", "HKALE", "IELTS", "GCSE", "IB", "Others", "Not Specified"]
+question_types = ["MC", "Long Questions", "Short Questions", "Open-ended Questions", "Fill in the Blank", "Short Answer", "Long Answer"]
 
 subjects.each do |s|
   Subject.create(subject: s)
@@ -22,7 +23,9 @@ formats.each do |f|
   Format.create(name: f)
 end
 
-puts Dir.pwd
+question_types.each do |q|
+  QuestionType.create(name: q)
+end
 
 
 school_file_path = Rails.root.join("db")

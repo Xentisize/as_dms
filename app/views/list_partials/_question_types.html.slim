@@ -1,0 +1,4 @@
+datalist id="question_types-list"
+  - cache QuestionType.last do
+    - QuestionType.all.each do |c|
+      option value="#{c.name}"
