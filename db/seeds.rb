@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-subjects = %w(Chinese English Mathematics Physics Chemistry Biology IS LS Economics Accounts )
+subjects = %w(Chinese English Mathematics Physics Chemistry Biology IS LS Economics Accounts)
 students = ["Jason Law", "Russell Mak", "Andix Chan", "Karinna Lai"]
 formats = ["Worksheet", "Test", "Exam", "Mock", "DSE", "HKCEE", "HKALE", "IELTS", "GCSE", "IB", "Others", "Not Specified"]
 
@@ -20,4 +20,13 @@ end
 
 formats.each do |f|
   Format.create(name: f)
+end
+
+puts Dir.pwd
+
+
+school_file_path = Rails.root.join("db")
+File.open("#{school_file_path}/school.txt").each do |l|
+  school = l.split(",")
+  School.find_or_create_by(english_name: school[0], chinese_name: school[1].lstrip.chomp)
 end

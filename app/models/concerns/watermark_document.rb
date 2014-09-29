@@ -1,8 +1,9 @@
 module WatermarkDocument
   extend ActiveSupport::Concern
 
-  require 'RMagick'
-  require 'rqrcode_png'
+  # require 'RMagick'
+  # require 'rqrcode_png'
+  # require 'image_optim'
 
   def watermarked_the_file
     # Setting up paths for processing
@@ -106,6 +107,10 @@ module WatermarkDocument
     label_y_coord = qr_y_coord
 
     png_files = Dir.glob("#{@png_path}/*.*")
+    image_optim = ImageOptim.new
+    png_files.each do |png|
+      image_optim.optimize_image!(png)
+    end
     qr_file = ChunkyPNG::Image.from_file(@qr_path.join("#{@tmp_file_identifier}-qr.png"))
 
     label_file = @label_path.join("#{@tmp_file_identifier}-label.png")
@@ -124,4 +129,6 @@ module WatermarkDocument
     image_lists = Magick::ImageList.new(*marked_png_files)
     image_lists.write("#{@pdf_path}/#{@original_file.file.filename}")
   end
+
+  handle_asynchronously :watermarked_the_file
 end

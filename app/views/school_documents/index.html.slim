@@ -7,6 +7,7 @@ table
     td Grade
     td Subject
     td Contributor
+    td Format
     td Category
     td File
   tbody
@@ -18,6 +19,7 @@ table
         td = sd.grade
         td = sd.subject.subject
         td = sd.student.name
+        td = sd.format.name
         td = sd.categories.first.name
         td = link_to "open", "#{sd.file.url}"
         td = link_to "open 2", "#{sd.file_location}"

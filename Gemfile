@@ -31,6 +31,7 @@ group :development, :test do
   gem 'web-console', '2.0.0.beta3'
   gem 'meta_request'
   gem 'byebug'
+  gem 'quiet_assets'
 end
 
 gem 'slim-rails'
@@ -41,6 +42,8 @@ gem 'carrierwave'
 gem 'oily_png'
 gem 'rqrcode_png'
 gem 'rmagick'
+gem 'delayed_job_active_record'
+gem 'image_optim'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
