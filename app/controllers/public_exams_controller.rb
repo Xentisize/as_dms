@@ -7,6 +7,7 @@ class PublicExamsController < ApplicationController
     @public_exam = PublicExam.new
     @public_exam.build_subject
     @public_exam.build_format
+    @public_exam.build_publisher
   end
 
   def create
@@ -19,6 +20,10 @@ class PublicExamsController < ApplicationController
     unless public_exam_format_params[:format_id].blank?
       @public_exam.format = Format.find_by(id: public_exam_format_params[:format_id])
     end
+
+    unless public_exam_publisher_params.blank?
+      @public_exam.publisher = Publisher.find_or_create_by(name: public_exam_publisher_params[:publisher][:name])
+  end
 
     if @public_exam.save
       redirect_to public_exams_path
@@ -37,7 +42,7 @@ class PublicExamsController < ApplicationController
   end
 
   def public_exam_params
-    params.require(:public_exam).permit(:year, :publisher, :file)
+    params.require(:public_exam).permit(:year, :file)
   end
 
   def public_exam_subject_params
@@ -46,6 +51,10 @@ class PublicExamsController < ApplicationController
 
   def public_exam_format_params
     params.require(:public_exam).permit(:format_id)
+  end
+
+  def public_exam_publisher_params
+    params.require(:public_exam).permit(:publisher => [:name])
   end
 
 end

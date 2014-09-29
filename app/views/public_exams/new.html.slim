@@ -7,7 +7,9 @@
   = f.association :subject
   = f.association :format
 
-  = f.input :publisher
+  = f.simple_fields_for :publisher do |s|
+    = s.input :name, required: false, input_html: { list: 'publishers-list' }
+    = render 'list_partials/publishers'
 
   div class="input string optional"
     label class="string optional" for="public_exam_question_types_name" Question Type

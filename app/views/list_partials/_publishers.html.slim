@@ -1,0 +1,4 @@
+datalist id="publishers-list"
+  - cache Publisher.last do
+    - Publisher.all.each do |p|
+      option value="#{p.name}"

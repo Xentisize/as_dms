@@ -4,7 +4,7 @@ class CreatePublicExams < ActiveRecord::Migration
       t.integer :year
       t.belongs_to :format
       t.belongs_to :subject
-      t.string :publisher
+      t.belongs_to :publisher
       t.string :file
       t.string :file_location
 
