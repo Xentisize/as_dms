@@ -5,7 +5,7 @@ module WatermarkDocument
   # require 'rqrcode_png'
   # require 'image_optim'
 
-  def watermarked_the_file
+  def setup_path
     # Setting up paths for processing
     @original_file = file
     if @original_file
@@ -24,17 +24,34 @@ module WatermarkDocument
       @file_location = Pathname.new("/store/files/#{file.file.filename}")
       @thumbnail_location = Rails.root.join("public", "storage", "files", "thumbnail")
     end
+  end
 
+  def watermarked_school_document
+    setup_path
     check_or_create_dirs
     check_or_empty_dirs
     copy_file_for_process
     tmp_to_png
-    generate_qr_code("#{id}", {height: 150, width: 150})
-    generate_label(generate_label_texts)
+    generate_qr_code("SD-#{id}", {height: 150, width: 150})
+    generate_label(generate_label_texts("SD", ""))
     stamp_png_files
     to_pdf
     update_column(:file_location, @file_location.to_path)
   end
+
+  def watermarked_public_exam
+    setup_path
+    check_or_create_dirs
+    check_or_empty_dirs
+    copy_file_for_process
+    tmp_to_png
+    generate_qr_code("PE-#{id}", {height: 150, width: 150})
+    generate_label(generate_label_texts("PE", ""))
+    stamp_png_files
+    to_pdf
+    update_column(:file_location, @file_location.to_path)
+  end
+
 
   def check_or_create_dirs
     # Check the existence of dirs, if not create it.
@@ -78,14 +95,16 @@ module WatermarkDocument
     png.resize(size[:height], size[:width]).save("#{@qr_path}/#{@tmp_file_identifier}-qr.png")
   end
 
-  def generate_label_texts
-    @file_id = id
-    if categories.size > 0
-      @categories_string = categories.map { |c| c.name }
-      @label_string = "ID: #{@file_id}\nCategories: " + @categories_string.join(", ")
-    else
-      @label_string = "ID: #{@file_id}\nCategories: Unspecifed"
-    end
+  def generate_label_texts(format, categories="")
+    @file_id = "#{format}-#{id}"
+    @label_string = "ID: #{@file_id}"
+    # if categories.exist?
+    # if categories.size > 0
+    #   @categories_string = categories.map { |c| c.name }
+    #   @label_string = "ID: #{@file_id}\nCategories: " + @categories_string.join(", ")
+    # else
+    #   @label_string = "ID: #{@file_id}\nCategories: Unspecifed"
+    # end
   end
 
   def generate_label(contents)
@@ -130,5 +149,6 @@ module WatermarkDocument
     image_lists.write("#{@pdf_path}/#{@original_file.file.filename}")
   end
 
-  handle_asynchronously :watermarked_the_file
+  handle_asynchronously :watermarked_school_document
+  handle_asynchronously :watermarked_public_exam
 end

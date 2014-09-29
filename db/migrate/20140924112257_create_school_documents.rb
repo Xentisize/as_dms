@@ -4,7 +4,6 @@ class CreateSchoolDocuments < ActiveRecord::Migration
       t.string :name
       t.belongs_to :subject
       t.belongs_to :student
-      # t.belongs_to :question_type
       t.integer :year
       t.integer :term
       t.integer :grade

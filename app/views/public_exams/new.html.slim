@@ -1,0 +1,19 @@
+
+= simple_form_for @public_exam do |f|
+  / # = f.input :name
+  = f.file_field :file
+  = f.input :year
+
+  = f.association :subject
+  = f.association :format
+
+  = f.input :publisher
+
+  div class="input string optional"
+    label class="string optional" for="public_exam_question_types_name" Question Type
+    input class="string optional public_exam_question_types" name="public_exam[question_types][1][name]" type="text" list="question_types-list"
+    = link_to "add", "#", id: "new_question_type"
+    = render 'list_partials/question_types'
+
+  br
+  = f.button :submit

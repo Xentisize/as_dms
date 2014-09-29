@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # get 'school_documents/new_category_path', to: "school_documents#new_category_field"
 
   resources :school_documents
+  resources :public_exams
   # get 'school_documents/index'
 
   # get 'school_documents/new'

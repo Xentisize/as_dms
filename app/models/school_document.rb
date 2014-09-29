@@ -5,9 +5,10 @@ class SchoolDocument < ActiveRecord::Base
   belongs_to :format
   has_and_belongs_to_many :question_types
   has_and_belongs_to_many :categories
+
   mount_uploader :file, FileUploader
 
   include WatermarkDocument
-  after_save :watermarked_the_file
+  after_save :watermarked_school_document
 
 end
