@@ -3,6 +3,7 @@ class SchoolDocument < ActiveRecord::Base
   belongs_to :student
   belongs_to :school
   belongs_to :format
+  has_one :solution, :as => :solvable, :dependent => :destroy
   has_and_belongs_to_many :question_types
   has_and_belongs_to_many :categories
 

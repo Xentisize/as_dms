@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140929120043) do
+ActiveRecord::Schema.define(version: 20140930060822) do
+
+  create_table "audios", force: true do |t|
+    t.string   "audio_file"
+    t.integer  "audioable_id"
+    t.string   "audioable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -100,6 +108,14 @@ ActiveRecord::Schema.define(version: 20140929120043) do
   create_table "schools", force: true do |t|
     t.string   "english_name"
     t.string   "chinese_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "solutions", force: true do |t|
+    t.string   "solution_file"
+    t.integer  "solvable_id"
+    t.string   "solvable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

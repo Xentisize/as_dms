@@ -4,12 +4,20 @@
   = f.file_field :file
   = f.input :year
 
+  = f.simple_fields_for :solution do |sf|
+    = sf.file_field :solution_file
+
   = f.association :subject
   = f.association :format
 
   = f.simple_fields_for :publisher do |s|
     = s.input :name, required: false, input_html: { list: 'publishers-list' }
     = render 'list_partials/publishers'
+
+  div class="input string optional"
+    label class="string optional" for="public_exam_audios" Audios
+    input type="file" class="optional public_exam_audios" name="public_exam[audios][1][audio_file]"
+    = link_to "add", "#", id: "new_audio"
 
   div class="input string optional"
     label class="string optional" for="public_exam_question_types_name" Question Type

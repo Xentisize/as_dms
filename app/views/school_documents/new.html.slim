@@ -19,6 +19,9 @@
     = s.input :chinese_name, required: false, input_html: { list: 'chinese-schools-list' }
     = render 'list_partials/chinese_schools'
 
+  = f.simple_fields_for :solution do |sf|
+    = sf.file_field :solution_file
+
   div class="input string optional"
     label class="string optional" for="school_document_categories_name" Category
     input class="string optional school_document_categories" name="school_document[categories][1][name]" type="text" list="categories-list"

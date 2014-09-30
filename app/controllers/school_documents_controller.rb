@@ -15,6 +15,14 @@ class SchoolDocumentsController < ApplicationController
   def create
     @school_document = SchoolDocument.new(school_document_params)
 
+    unless school_document_solution_params[:solution].blank?
+      @solution = Solution.new
+      @solution.solution_file = school_document_solution_params[:solution][:solution_file]
+      if @solution.save
+        @school_document.solution = @solution
+      end
+    end
+
     unless school_document_subject_params[:subject_id].blank?
       @school_document.subject = Subject.find_or_create_by(id: school_document_subject_params[:subject_id])
     end
@@ -70,12 +78,6 @@ class SchoolDocumentsController < ApplicationController
     end
   end
 
-  # def new_category_field
-  #   respond_to do |format|
-  #     format.js
-  #   end
-  # end
-
   private
 
   def all_school_documents
@@ -84,6 +86,10 @@ class SchoolDocumentsController < ApplicationController
 
   def school_document_params
     params.require(:school_document).permit(:name, :year, :term, :grade, :file)
+  end
+
+  def school_document_solution_params
+    params.require(:school_document).permit(:solution => [:solution_file])
   end
 
   def school_document_subject_params

@@ -3,6 +3,8 @@ class PublicExam < ActiveRecord::Base
   belongs_to :subject
   belongs_to :publisher
   has_and_belongs_to_many :question_types
+  has_one :solution, :as => :solvable, :dependent => :destroy
+  has_many :audios, :as => :audioable, :dependent => :destroy
 
   mount_uploader :file, FileUploader
 

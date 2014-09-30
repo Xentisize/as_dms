@@ -7,3 +7,13 @@ $(function() {
     $(new_field).insertAfter(".public_exam_question_types:last");
   });
 });
+
+$(function() {
+  $("#new_audio").click(function(evt) {
+    evt.stopPropagation();
+    var number_of_audio_files = $("input[name^='public_exam[audios]']").length;
+    var new_file_field = "<br><input type='file' class='public_exam_audios' name='public_exam[audios][" + (number_of_audio_files + 1) + "][audio_file]''>";
+    $(new_file_field).insertAfter(".public_exam_audios:last");
+  });
+});
+
