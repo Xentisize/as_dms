@@ -19,8 +19,19 @@
     = s.input :chinese_name, required: false, input_html: { list: 'chinese-schools-list' }
     = render 'list_partials/chinese_schools'
 
-  = f.simple_fields_for :solution do |sf|
-    = sf.file_field :solution_file
+  div
+    a href="#" id="solution-upload-button" style="color:white"
+      button type="button" class="btn btn-primary"
+        span Add Solution(s)
+    input type="file" id="solutions-upload-field" name="solutions[]" multiple="multiple"
+    a href="#" id="solution-reset-button" style="color:white"
+      button type="button" class="btn btn-danger"
+        span Reset
+
+
+  table#solution-files-table class="table table-striped"
+    tbody
+      tr
 
   div class="input string optional"
     label class="string optional" for="school_document_categories_name" Category
