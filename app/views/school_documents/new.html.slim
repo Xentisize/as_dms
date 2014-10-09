@@ -33,6 +33,19 @@
     tbody
       tr
 
+  div
+    a href="#" id="audio-upload-button" style="color:white"
+      button type="button" class="btn btn-primary"
+        span Add Audio(s)
+    input type="file" id="audios-upload-field" name="school_document[audios][]" multiple="multiple"
+    a href="#" id="audio-reset-button" style="color:white"
+      button type="button" class="btn btn-danger"
+        span Reset
+
+  table#audio-files-table class="table table-striped"
+    tbody
+      tr
+
   div class="input string optional"
     label class="string optional" for="school_document_categories_name" Category
     input class="string optional school_document_categories" name="school_document[categories][1][name]" type="text" list="categories-list"

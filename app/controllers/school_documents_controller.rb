@@ -22,6 +22,14 @@ class SchoolDocumentsController < ApplicationController
       end
     end
 
+    unless school_document_audio_params[:audios].blank?
+      school_document_audio_params[:audios].each do |audio|
+        @audio = Audio.new
+        @audio.audio_file = audio
+        @school_document.audios << @audio
+      end
+    end
+
     unless school_document_subject_params[:subject_id].blank?
       @school_document.subject = Subject.find_or_create_by(id: school_document_subject_params[:subject_id])
     end
@@ -66,13 +74,15 @@ class SchoolDocumentsController < ApplicationController
       end
     end
 
-
-
     if @school_document.save
       redirect_to school_documents_path
     else
       render :new
     end
+  end
+
+  def show
+    @school_document = SchoolDocument.find(params[:id])
   end
 
   private
@@ -87,7 +97,10 @@ class SchoolDocumentsController < ApplicationController
 
   def school_document_solution_params
     params.require(:school_document).permit(:solutions => [])
-    # params.require(:school_document).permit(:solution => [:solution_file])
+  end
+
+  def school_document_audio_params
+    params.require(:school_document).permit(:audios => [])
   end
 
   def school_document_subject_params

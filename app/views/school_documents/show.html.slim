@@ -1,0 +1,13 @@
+- doc = @school_document
+= doc.year
+br
+= doc.subject.subject
+br
+= doc.student.name
+br
+= doc.term
+br
+= doc.grade
+br
+- doc.solutions.each do |s|
+  = link_to "Solution", s.solution_file.url

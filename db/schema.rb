@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20140930060822) do
 
   create_table "audios", force: true do |t|
     t.string   "audio_file"
-    t.integer  "audioable_id"
-    t.string   "audioable_type"
+    t.integer  "audible_id"
+    t.string   "audible_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

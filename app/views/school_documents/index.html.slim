@@ -14,7 +14,7 @@ table
   tbody
     - @school_documents.each do |sd|
       tr
-        td = sd.name
+        td = link_to sd.name, school_document_path(sd)
         td = sd.year
         td = sd.term
         td = sd.grade

@@ -59,7 +59,7 @@ $(function() {
     var files = document.getElementById("solutions-upload-field").files;
     if (files.length > 0) {
       $.each(files, function(idx, elm) {
-        var file = "<tr><td>" + elm.name + "</td><td><span class='" + idx + " solution-files glyphicon glyphicon-remove'></span></td></tr>";
+        var file = "<tr><td>" + elm.name + "</td></tr>";
         $(file).insertAfter("table#solution-files-table tr:last");
       });
     }
@@ -68,38 +68,45 @@ $(function() {
 
 $(function() {
   $("#solution-reset-button").click(function(evt) {
-    console.log("Reset");
     evt.preventDefault();
-    var solution_upload_template = $("#solutions-upload-field");
-    console.log(solution_upload_template);
-    $("#solutions-upload-field").replaceWith($(solution_upload_template).clone(true));
-    $("#solution-upload-button").click(function(evt) {
-      evt.preventDefault();
-      $("#solutions-upload-field").trigger("click");
+    var file_field = document.getElementById("solutions-upload-field");
+    file_field.value = "";
+    $("table#solution-files-table tr td").each(function() {
+      if ($(this).html() !== "") {
+        $(this).parent().fadeOut().remove();
+      }
     });
   });
 });
-// $(function() {
-//   $("table#solution-files-table").change(function() {
-//     console.log("Xxx");
-//     $(".solution-files").click(function() {
-//       console.log(this);
-//     });
-//   });
-// });
-//     // console.log(this);
 
-// $(function() {
-//   $("#solution-files-upload").change(function() {
-//     console.log("File selected");
-//     var solution_files = document.getElementById("solution-files-upload");
-//     if (solution_files.files.length > 0) {
-//       // $.each(solution_files.files, function(idx, elm) {
-//       //   // var solution_file ="<tr><td>" + elm.name + "</td></tr>";
-//       //   // $(solution_file).insertAfter(".solution-files-table:last");
-//       //   console.log(idx + ":" + elm.name);
-//       // });
-//       console.log("There are " + solution_files.files.length + " files");
-//     }
-//   });
-// });
+$(function() {
+  $("#audio-upload-button").click(function(evt) {
+    evt.preventDefault();
+    $("#audios-upload-field").trigger("click");
+  });
+});
+
+$(function() {
+  $("#audios-upload-field").change(function() {
+    var audios = document.getElementById("audios-upload-field").files;
+    if (audios.length > 0) {
+      $.each(audios, function(idx, elm) {
+        var audio = "<tr><td>" + elm.name + "</td></tr>";
+        $(audio).insertAfter("table#audio-files-table tr:last");
+      });
+    }
+  });
+});
+
+$(function() {
+  $("#audio-reset-button").click(function(evt) {
+    evt.preventDefault();
+    var audio_field = document.getElementById("audios-upload-field");
+    audio_field.value = "";
+    $("table#audio-files-table tr td").each(function() {
+      if ($(this).html !== "") {
+        $(this).parent().fadeOut().remove();
+      }
+    });
+  });
+});
