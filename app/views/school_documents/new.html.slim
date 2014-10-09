@@ -1,7 +1,7 @@
 
 = simple_form_for @school_document, multipart: true do |f|
   / # = f.input :name
-  = f.file_field :file
+  = f.input :file, :as => "file", input_html: { class: 'file', 'data-show-upload' => 'false', 'data-show-preview' => 'false', placeholder: "Upload Document Here..." }
   = f.input :year
   = f.input :term
   = f.input :grade
