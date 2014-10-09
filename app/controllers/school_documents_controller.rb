@@ -10,18 +10,29 @@ class SchoolDocumentsController < ApplicationController
     @school_document.build_student
     @school_document.build_school
     @school_document.build_format
+    # @school_document.solutions
   end
 
   def create
     @school_document = SchoolDocument.new(school_document_params)
-
-    unless school_document_solution_params[:solution].blank?
-      @solution = Solution.new
-      @solution.solution_file = school_document_solution_params[:solution][:solution_file]
-      if @solution.save
-        @school_document.solution = @solution
+    logger.info "\n\n\n\nWhat inside: #{school_document_solution_params}"
+    logger.info "Inside create: \n\n\n#{school_document_solution_params[:solutions]}"
+    logger.info "SIZE: #{school_document_solution_params[:solutions].size}"
+    # logger.info "Original file: #{school_document_params[:file]}"
+    unless school_document_solution_params[:solutions].blank?
+      school_document_solution_params[:solutions].each do |sol|
+        @solution = Solution.new
+        @solution.solution_file = sol
+        @school_document.solutions << @solution
       end
     end
+      # logger.info "\n\n\n\#{school_document_solution_params[:solutions]}"
+      # @solution = Solution.new
+      # @solution.solution_file = school_document_solution_params[:solution][:solution_file]
+      # if @solution.save
+      #   @school_document.solution = @solution
+      # end
+
 
     unless school_document_subject_params[:subject_id].blank?
       @school_document.subject = Subject.find_or_create_by(id: school_document_subject_params[:subject_id])
@@ -89,7 +100,8 @@ class SchoolDocumentsController < ApplicationController
   end
 
   def school_document_solution_params
-    params.require(:school_document).permit(:solution => [:solution_file])
+    params.require(:school_document).permit(:solutions => [])
+    # params.require(:school_document).permit(:solution => [:solution_file])
   end
 
   def school_document_subject_params
@@ -115,4 +127,5 @@ class SchoolDocumentsController < ApplicationController
   def school_document_format_params
     params.require(:school_document).permit(:format_id)
   end
+
 end
