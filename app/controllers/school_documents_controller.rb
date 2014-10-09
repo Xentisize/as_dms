@@ -10,15 +10,10 @@ class SchoolDocumentsController < ApplicationController
     @school_document.build_student
     @school_document.build_school
     @school_document.build_format
-    # @school_document.solutions
   end
 
   def create
     @school_document = SchoolDocument.new(school_document_params)
-    logger.info "\n\n\n\nWhat inside: #{school_document_solution_params}"
-    logger.info "Inside create: \n\n\n#{school_document_solution_params[:solutions]}"
-    logger.info "SIZE: #{school_document_solution_params[:solutions].size}"
-    # logger.info "Original file: #{school_document_params[:file]}"
     unless school_document_solution_params[:solutions].blank?
       school_document_solution_params[:solutions].each do |sol|
         @solution = Solution.new
@@ -26,13 +21,6 @@ class SchoolDocumentsController < ApplicationController
         @school_document.solutions << @solution
       end
     end
-      # logger.info "\n\n\n\#{school_document_solution_params[:solutions]}"
-      # @solution = Solution.new
-      # @solution.solution_file = school_document_solution_params[:solution][:solution_file]
-      # if @solution.save
-      #   @school_document.solution = @solution
-      # end
-
 
     unless school_document_subject_params[:subject_id].blank?
       @school_document.subject = Subject.find_or_create_by(id: school_document_subject_params[:subject_id])
@@ -74,8 +62,6 @@ class SchoolDocumentsController < ApplicationController
       else
         if chinese_school.english_name == school_document_school_params[:school][:english_name]
           @school_document.school = chinese_school
-        # else
-        #   redirect_to new_school_document_path
         end
       end
     end

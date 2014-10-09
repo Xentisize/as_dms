@@ -6,7 +6,7 @@ class SchoolDocument < ActiveRecord::Base
   has_many :solutions, :as => :solvable, :dependent => :destroy
   has_and_belongs_to_many :question_types
   has_and_belongs_to_many :categories
-  accepts_nested_attributes_for :solutions
+  # accepts_nested_attributes_for :solutions
 
   mount_uploader :file, FileUploader
 
