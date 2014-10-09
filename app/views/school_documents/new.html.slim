@@ -1,62 +1,73 @@
-
-= simple_form_for @school_document, multipart: true do |f|
-  / # = f.input :name
-  = f.input :file, :as => "file", input_html: { class: 'file', 'data-show-upload' => 'false', 'data-show-preview' => 'false', placeholder: "Upload Document Here..." }
-  = f.input :year
-  = f.input :term
-  = f.input :grade
-
-  = f.association :subject
-  = f.association :format
-
-  = f.simple_fields_for :student do |s|
-    = s.input :name, required: false, input_html: { list: 'students-list' }
-    = render 'list_partials/students'
-
-  = f.simple_fields_for :school do |s|
-    = s.input :english_name, required: false, input_html: { list: 'english-schools-list' }
-    = render 'list_partials/english_schools'
-    = s.input :chinese_name, required: false, input_html: { list: 'chinese-schools-list' }
-    = render 'list_partials/chinese_schools'
-
-  div
-    a href="#" id="solution-upload-button" style="color:white"
-      button type="button" class="btn btn-primary"
-        span Add Solution(s)
-    input type="file" id="solutions-upload-field" name="school_document[solutions][]" multiple="multiple"
-    a href="#" id="solution-reset-button" style="color:white"
-      button type="button" class="btn btn-danger"
-        span Reset
+div.container.school-document-form-container
+  h3.text-center School Document
+  hr
+  = simple_form_for @school_document, multipart: true, role: 'form' do |f|
+    div.row
+      div.form-group
+        div.col-md-3
+          = f.input_field :year, placeholder: "Document Year", label: false, class: 'form-control'
+        div.col-md-3
+          = f.input_field :term, placeholder: "Academic Term (1, 2, 3...)", label: false, class: 'form-control'
+        div.col-md-5
+          = f.input_field :grade, placeholder: "Grade - [Pri] 1-6, [Sec] 7-12, [Uni] 13-16", label: false, class: 'form-control'
+    div.row
+      div.form-group
+        div.col-md-8
+          = f.input :file, :as => "file", placeholder: "Upload Document here", label: "Main Document", input_html: { class: 'file', 'data-show-upload' => 'false', 'data-show-preview' => 'false' }
+          span class="help-block" Only PDF or DOC Documents are supported right now.
 
 
-  table#solution-files-table class="table table-striped"
-    tbody
-      tr
+    = f.association :subject
+    = f.association :format
 
-  div
-    a href="#" id="audio-upload-button" style="color:white"
-      button type="button" class="btn btn-primary"
-        span Add Audio(s)
-    input type="file" id="audios-upload-field" name="school_document[audios][]" multiple="multiple"
-    a href="#" id="audio-reset-button" style="color:white"
-      button type="button" class="btn btn-danger"
-        span Reset
+    = f.simple_fields_for :student do |s|
+      = s.input :name, required: false, input_html: { list: 'students-list' }
+      = render 'list_partials/students'
 
-  table#audio-files-table class="table table-striped"
-    tbody
-      tr
+    = f.simple_fields_for :school do |s|
+      = s.input :english_name, required: false, input_html: { list: 'english-schools-list' }
+      = render 'list_partials/english_schools'
+      = s.input :chinese_name, required: false, input_html: { list: 'chinese-schools-list' }
+      = render 'list_partials/chinese_schools'
 
-  div class="input string optional"
-    label class="string optional" for="school_document_categories_name" Category
-    input class="string optional school_document_categories" name="school_document[categories][1][name]" type="text" list="categories-list"
-    = link_to "add", "#", id: "new_category"
-    = render 'list_partials/categories'
+    div
+      a href="#" id="solution-upload-button" style="color:white"
+        button type="button" class="btn btn-primary"
+          span Add Solution(s)
+      input type="file" id="solutions-upload-field" name="school_document[solutions][]" multiple="multiple"
+      a href="#" id="solution-reset-button" style="color:white"
+        button type="button" class="btn btn-danger"
+          span Reset
 
-  div class="input string optional"
-    label class="string optional" for="school_document_question_types_name" Question Type
-    input class="string optional school_document_question_types" name="school_document[question_types][1][name]" type="text" list="question_types-list"
-    = link_to "add", "#", id: "new_question_type"
-    = render 'list_partials/question_types'
 
-  br
-  = f.button :submit
+    table#solution-files-table class="table table-striped"
+      tbody
+        tr
+
+    div
+      a href="#" id="audio-upload-button" style="color:white"
+        button type="button" class="btn btn-primary"
+          span Add Audio(s)
+      input type="file" id="audios-upload-field" name="school_document[audios][]" multiple="multiple"
+      a href="#" id="audio-reset-button" style="color:white"
+        button type="button" class="btn btn-danger"
+          span Reset
+
+    table#audio-files-table class="table table-striped"
+      tbody
+        tr
+
+    div class="input string optional"
+      label class="string optional" for="school_document_categories_name" Category
+      input class="string optional school_document_categories" name="school_document[categories][1][name]" type="text" list="categories-list"
+      = link_to "add", "#", id: "new_category"
+      = render 'list_partials/categories'
+
+    div class="input string optional"
+      label class="string optional" for="school_document_question_types_name" Question Type
+      input class="string optional school_document_question_types" name="school_document[question_types][1][name]" type="text" list="question_types-list"
+      = link_to "add", "#", id: "new_question_type"
+      = render 'list_partials/question_types'
+
+    br
+    = f.button :submit

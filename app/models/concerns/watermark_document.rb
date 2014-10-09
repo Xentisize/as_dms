@@ -1,8 +1,8 @@
 module WatermarkDocument
   extend ActiveSupport::Concern
 
-  # require 'RMagick'
-  # require 'rqrcode_png'
+  require 'RMagick'
+  require 'rqrcode_png'
   # require 'image_optim'
 
   def setup_path

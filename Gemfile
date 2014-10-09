@@ -43,7 +43,7 @@ gem 'oily_png'
 gem 'rqrcode_png'
 gem 'rmagick'
 gem 'delayed_job_active_record'
-gem 'image_optim'
+# gem 'image_optim'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
