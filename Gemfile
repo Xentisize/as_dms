@@ -43,6 +43,7 @@ gem 'oily_png'
 gem 'rqrcode_png'
 gem 'rmagick'
 gem 'delayed_job_active_record'
+gem 'autoprefixer-rails'
 # gem 'image_optim'
 
 # Use ActiveModel has_secure_password

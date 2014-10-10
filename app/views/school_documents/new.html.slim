@@ -1,5 +1,6 @@
 div.container.school-document-form-container
-  h3.text-center School Document
+  div.row.heading
+    h3.text-center School Document
   hr
   = simple_form_for @school_document, multipart: true, role: 'form' do |f|
     div.form-group
@@ -31,7 +32,24 @@ div.container.school-document-form-container
           = f.association :format, label: false, input_html: { class: "selectpicker" }
           span class="help-block" Document Format: Test, Exam, Worksheet ....
 
-
+    div.row
+      div.col-md-4
+        div class="input-group new_category_group"
+          input class="string optional school_document_categories form-control" name="school_document[categories][1][name]" type="text" list="categories-list" placeholder="Document Category"
+          span class="input-group-btn"
+            button class="btn btn-default" type="button"
+              a href="#" class="new_category"
+                span class="glyphicon glyphicon-plus"
+          / # = link_to "add", "#", id: "new_category"
+        = render 'list_partials/categories'
+      div.col-md-4
+        div class="input-group new_question_type_group"
+          input class="string school_document_question_types form-control" name="school_document[question_types][1][name]" type="text" list="question_types-list" placeholder="Question Format"
+          span class="input-group-btn"
+            button class="btn btn-default" type="button"
+              a href="#" class="new_question_type"
+                span class="glyphicon glyphicon-plus"
+        = render 'list_partials/question_types'
 
     div.row
       div.form-group
@@ -73,17 +91,7 @@ div.container.school-document-form-container
       tbody
         tr
 
-    div class="input string optional"
-      label class="string optional" for="school_document_categories_name" Category
-      input class="string optional school_document_categories" name="school_document[categories][1][name]" type="text" list="categories-list"
-      = link_to "add", "#", id: "new_category"
-      = render 'list_partials/categories'
 
-    div class="input string optional"
-      label class="string optional" for="school_document_question_types_name" Question Type
-      input class="string optional school_document_question_types" name="school_document[question_types][1][name]" type="text" list="question_types-list"
-      = link_to "add", "#", id: "new_question_type"
-      = render 'list_partials/question_types'
 
     br
     = f.button :submit

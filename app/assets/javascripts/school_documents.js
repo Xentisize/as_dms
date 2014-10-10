@@ -1,22 +1,38 @@
+function add_new_category() {
+  var number_of_input_fields = $("input[name^='school_document[categories]']").length;
+  var new_field = "<div class='input-group new_category'><input class='string optional school_document_categories form-control' placeholder='Document Category' name='school_document[categories]["+ (number_of_input_fields + 1) + "][name]' type='text' list='categories-list'><span class='input-group-btn'><button class='btn btn-default' onclick='add_new_category(); return false;'><a href='#' class='new_category'><span class='glyphicon glyphicon-plus'></span></a></button></div>";
+  $(new_field).insertAfter(".new_category_group:last").focus();
+}
+
+
+
 $(function() {
-  $("#new_category").click(function(evt) {
+  $(".new_category").click(function(evt) {
     evt.stopPropagation();
     // Find out the size of input fields for the name of new field
     var number_of_input_fields = $("input[name^='school_document[categories]']").length;
-    var new_field = "<br><input class='string optional school_document_categories' name='school_document[categories]["+ (number_of_input_fields + 1) + "][name]' type='text' list='categories-list'>";
-    $(new_field).insertAfter(".school_document_categories:last");
+    var new_field = "<div class='input-group new_category'><input class='string optional school_document_categories form-control' placeholder='Document Category' name='school_document[categories]["+ (number_of_input_fields + 1) + "][name]' type='text' list='categories-list'><span class='input-group-btn'><button class='btn btn-default' onclick='add_new_category(); return false;'><a href='#' class='new_category'><span class='glyphicon glyphicon-plus'></span></a></button></div>";
+    $(new_field).insertAfter(".new_category_group:last").focus();
   });
 });
 
+function add_new_question_type() {
+    var number_of_input_fields = $("input[name^='school_document[question_types]']").length;
+    var new_field = "<div class='input-group new_question_type_group'><input class='string optional school_document_question_types form-control' placeholder='Question Format' name='school_document[question_types]["+ (number_of_input_fields + 1) + "][name]' type='text' list='question_types-list'><span class='input-group-btn'><button class='btn btn-default' onclick='add_new_question_type(); return false;'><a href='#' class='new_question_type'><span class='glyphicon glyphicon-plus'></span></a></button></div>";
+    $(new_field).insertAfter(".new_question_type_group:last").focus();
+}
+
 $(function() {
-  $("#new_question_type").click(function(evt) {
+  $(".new_question_type").click(function(evt) {
     evt.stopPropagation();
     // Find out the size of input fields for the name of new field
     var number_of_input_fields = $("input[name^='school_document[question_types]']").length;
-    var new_field = "<br><input class='string optional school_document_question_types' name='school_document[question_types]["+ (number_of_input_fields + 1) + "][name]' type='text' list='question_types-list'>";
-    $(new_field).insertAfter(".school_document_question_types:last");
+    var new_field = "<div class='input-group new_question_type_group'><input class='string optional school_document_question_types form-control' placeholder='Question Format' name='school_document[question_types]["+ (number_of_input_fields + 1) + "][name]' type='text' list='question_types-list'><span class='input-group-btn'><button class='btn btn-default' onclick='add_new_question_type(); return false;'><a href='#' class='new_question_type'><span class='glyphicon glyphicon-plus'></span></a></button></div>";
+    $(new_field).insertAfter(".new_question_type_group:last").focus();
   });
 });
+
+
 
 // Match the english / chinese school name when blurred
 $(function() {

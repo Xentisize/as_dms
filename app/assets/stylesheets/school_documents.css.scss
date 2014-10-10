@@ -1,7 +1,7 @@
 // Place all the styles related to the SchoolDocuments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+@import "bootstrap";
 #solutions-upload-field {
   visibility: hidden;
 }
@@ -12,9 +12,13 @@
 
 .school-document-form-container {
   margin-top: 30px;
-  border-radius: 3px;
+  border-radius: 10px;
   border: 2px solid black;
   padding: 10px;
+  // div.heading {
+  //   margin-top: 0px;
+  //   background-color: blue;
+  // }
 }
 
 .school-document-form-container div.row {
