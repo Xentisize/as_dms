@@ -1,17 +1,15 @@
 function add_new_category() {
   var number_of_input_fields = $("input[name^='school_document[categories]']").length;
-  var new_field = "<div class='input-group new_category'><input class='string optional school_document_categories form-control' placeholder='Document Category' name='school_document[categories]["+ (number_of_input_fields + 1) + "][name]' type='text' list='categories-list'><span class='input-group-btn'><button class='btn btn-default' onclick='add_new_category(); return false;'><a href='#' class='new_category'><span class='glyphicon glyphicon-plus'></span></a></button></div>";
+  var new_field = "<div class='input-group new_category_group'><input class='string optional school_document_categories form-control' placeholder='Document Category' name='school_document[categories]["+ (number_of_input_fields + 1) + "][name]' type='text' list='categories-list'><span class='input-group-btn'><button class='btn btn-default' onclick='add_new_category(); return false;'><a href='#' class='new_category'><span class='glyphicon glyphicon-plus'></span></a></button></div>";
   $(new_field).insertAfter(".new_category_group:last").focus();
 }
-
-
 
 $(function() {
   $(".new_category").click(function(evt) {
     evt.stopPropagation();
     // Find out the size of input fields for the name of new field
     var number_of_input_fields = $("input[name^='school_document[categories]']").length;
-    var new_field = "<div class='input-group new_category'><input class='string optional school_document_categories form-control' placeholder='Document Category' name='school_document[categories]["+ (number_of_input_fields + 1) + "][name]' type='text' list='categories-list'><span class='input-group-btn'><button class='btn btn-default' onclick='add_new_category(); return false;'><a href='#' class='new_category'><span class='glyphicon glyphicon-plus'></span></a></button></div>";
+    var new_field = "<div class='input-group new_category_group'><input class='string optional school_document_categories form-control' placeholder='Document Category' name='school_document[categories]["+ (number_of_input_fields + 1) + "][name]' type='text' list='categories-list'><span class='input-group-btn'><button class='btn btn-default' onclick='add_new_category(); return false;'><a href='#' class='new_category'><span class='glyphicon glyphicon-plus'></span></a></button></div>";
     $(new_field).insertAfter(".new_category_group:last").focus();
   });
 });
@@ -59,70 +57,74 @@ $(function() {
   });
 });
 
-
-// Hide the solution input file fields
 $(function() {
-  // $("#solutions-upload-field").css("visibility", "hidden");
-  $("#solution-upload-button").click(function(evt) {
-    evt.preventDefault();
-    $("#solutions-upload-field").trigger("click");
-  });
+  $("#school-documents-table").DataTable();
 });
 
-// Show solution file name when there is change
-$(function() {
-  $("#solutions-upload-field").change(function() {
-    var files = document.getElementById("solutions-upload-field").files;
-    if (files.length > 0) {
-      $.each(files, function(idx, elm) {
-        var file = "<tr><td>" + elm.name + "</td></tr>";
-        $(file).insertAfter("table#solution-files-table tr:last");
-      });
-    }
-  });
-});
 
-$(function() {
-  $("#solution-reset-button").click(function(evt) {
-    evt.preventDefault();
-    var file_field = document.getElementById("solutions-upload-field");
-    file_field.value = "";
-    $("table#solution-files-table tr td").each(function() {
-      if ($(this).html() !== "") {
-        $(this).parent().fadeOut().remove();
-      }
-    });
-  });
-});
+// // Hide the solution input file fields
+// $(function() {
+//   // $("#solutions-upload-field").css("visibility", "hidden");
+//   $("#solution-upload-button").click(function(evt) {
+//     evt.preventDefault();
+//     $("#solutions-upload-field").trigger("click");
+//   });
+// });
 
-$(function() {
-  $("#audio-upload-button").click(function(evt) {
-    evt.preventDefault();
-    $("#audios-upload-field").trigger("click");
-  });
-});
+// // Show solution file name when there is change
+// $(function() {
+//   $("#solutions-upload-field").change(function() {
+//     var files = document.getElementById("solutions-upload-field").files;
+//     if (files.length > 0) {
+//       $.each(files, function(idx, elm) {
+//         var file = "<tr><td>" + elm.name + "</td></tr>";
+//         $(file).insertAfter("table#solution-files-table tr:last");
+//       });
+//     }
+//   });
+// });
 
-$(function() {
-  $("#audios-upload-field").change(function() {
-    var audios = document.getElementById("audios-upload-field").files;
-    if (audios.length > 0) {
-      $.each(audios, function(idx, elm) {
-        var audio = "<tr><td>" + elm.name + "</td></tr>";
-        $(audio).insertAfter("table#audio-files-table tr:last");
-      });
-    }
-  });
-});
+// $(function() {
+//   $("#solution-reset-button").click(function(evt) {
+//     evt.preventDefault();
+//     var file_field = document.getElementById("solutions-upload-field");
+//     file_field.value = "";
+//     $("table#solution-files-table tr td").each(function() {
+//       if ($(this).html() !== "") {
+//         $(this).parent().fadeOut().remove();
+//       }
+//     });
+//   });
+// });
 
-$(function() {
-  $("#audio-reset-button").click(function(evt) {
-    evt.preventDefault();
-    var audio_field = document.getElementById("audios-upload-field");
-    audio_field.value = "";
-    $("table#audio-files-table tr td").each(function() {
-      if ($(this).html !== "") {
-        $(this).parent().fadeOut().remove();
-      }
-    });
-  });
-});
+// $(function() {
+//   $("#audio-upload-button").click(function(evt) {
+//     evt.preventDefault();
+//     $("#audios-upload-field").trigger("click");
+//   });
+// });
+
+// $(function() {
+//   $("#audios-upload-field").change(function() {
+//     var audios = document.getElementById("audios-upload-field").files;
+//     if (audios.length > 0) {
+//       $.each(audios, function(idx, elm) {
+//         var audio = "<tr><td>" + elm.name + "</td></tr>";
+//         $(audio).insertAfter("table#audio-files-table tr:last");
+//       });
+//     }
+//   });
+// });
+
+// $(function() {
+//   $("#audio-reset-button").click(function(evt) {
+//     evt.preventDefault();
+//     var audio_field = document.getElementById("audios-upload-field");
+//     audio_field.value = "";
+//     $("table#audio-files-table tr td").each(function() {
+//       if ($(this).html !== "") {
+//         $(this).parent().fadeOut().remove();
+//       }
+//     });
+//   });
+// });

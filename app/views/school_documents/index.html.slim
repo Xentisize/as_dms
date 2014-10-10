@@ -1,27 +1,33 @@
-
-table
-  thead
-    td Name
-    td Year
-    td Term
-    td Grade
-    td Subject
-    td Contributor
-    td Format
-    td Question Type
-    td Category
-    td File
-  tbody
-    - @school_documents.each do |sd|
-      tr
-        td = link_to sd.name, school_document_path(sd)
-        td = sd.year
-        td = sd.term
-        td = sd.grade
-        td = sd.subject.subject
-        td = sd.student.name
-        td = sd.format.name
-        td = sd.question_types.first.name
-        td = sd.categories.first.name
-        td = link_to "open", "#{sd.file.url}"
-        td = link_to "open 2", "#{sd.file_location}"
+div.container
+    table id="school-documents-table"
+      thead
+        tr
+            th File
+            th School
+            th Subject
+            th Format
+            th Year
+            th Term
+            th Grade
+            th Contributor
+            th Solution
+            th Audio
+      tbody
+        - @school_documents.each do |sd|
+          tr
+            td <a href="/school_documents/#{sd.id}"><span class='glyphicon glyphicon-file'></span></a>
+            / td = link_to sd.name, school_document_path(sd)
+            td == display_school(sd)
+            td = sd.subject.subject
+            td = sd.format.name
+            td = sd.year
+            td = sd.term
+            td = sd.grade
+            td = sd.student.name
+            td.text-center == has_solutions?(sd)
+            td.text-center == has_audios?(sd)
+            / # td = sd.question_types.first.name
+            / td = sd.categories.first.name
+            / td = link_to "open", "#{sd.file.url}"
+            / td = link_to "open 2", "#{sd.file_location}"
+/

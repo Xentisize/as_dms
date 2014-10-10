@@ -1,6 +1,5 @@
 div.container.school-document-form-container
-  div.row.heading
-    h3.text-center School Document
+  h1.text-center School Document
   hr
   = simple_form_for @school_document, multipart: true, role: 'form' do |f|
     div.form-group
@@ -20,7 +19,7 @@ div.container.school-document-form-container
     div.row
       div.form-group
         div.col-md-8
-          = f.input :file, :as => "file", label: false, input_html: { class: 'file', 'data-show-upload' => 'false', 'data-show-preview' => 'false' }
+          = f.input :file, :as => "file", label: false, input_html: { class: 'file', 'data-show-remove' => true, 'data-show-upload' => 'false', 'data-show-preview' => 'false' }
           span class="help-block" Document File: Only PDF or DOC Documents are supported right now.
 
     div.row
@@ -57,41 +56,54 @@ div.container.school-document-form-container
           div.col-md-4
             = s.input :english_name, placeholder: "English School Name", label: false, required: false, input_html: { class: "form-control", list: 'english-schools-list' }
             = render 'list_partials/english_schools'
+            span class="help-block" Enter either English or Chinese School only
           div.col-md-4
             = s.input :chinese_name, placeholder: "Chinese School Name", label: false, required: false, input_html: { list: 'chinese-schools-list', class: 'form-control' }
             = render 'list_partials/chinese_schools'
 
     div.row
-      div.col-md-2
-        a href="#" id="solution-upload-button" style="color:white"
-          button type="button" class="btn btn-primary"
-            span Add Solution(s)
-        input type="file" id="solutions-upload-field" name="school_document[solutions][]" multiple="multiple"
-      div.col-md-1
-        a href="#" id="solution-reset-button" style="color:white"
-          button type="button" class="btn btn-danger"
-            span Reset
+      div.col-md-6
+        input type="file" class="file" id="solution-upload-field" name="school_document[solutions][]" multiple="multiple" data-show-upload="false" data-show-preview="false"
+        span class="help-block" Optional for Answer(s)
+      div.col-md-6
+        input type="file" class="file" name="school_document[audios][]" multiple="multiple" data-show-upload="false" data-show-preview="false"
+        span class="help-block" Optional for Audio(s)
+
     div.row
-      div.col-md-10.col-md-offset-1
-        table#solution-files-table class="table table-striped"
-          tbody
-            tr
+      div.col-md-2.col-md-offset-8
+        = f.button :submit, class: "btn btn-primary"
+      div.col-md-1
+        button type="reset" class="btn btn-danger" Cancel
+        / <a href="/school_documents/" class="text-danger">Cancel</a>
+        / a class="text-danger" href="/school_documents/" Cancel
+
+          / div.row
+    /   div.col-md-2
+    /     a href="#" id="solution-upload-button" style="color:white"
+    /       button type="button" class="btn btn-primary"
+    /         span Add Solution(s)
+    /     input type="file" class="file" id="solutions-upload-field" name="school_document[solutions][]" multiple="multiple"
+    /   div.col-md-1
+    /     a href="#" id="solution-reset-button" style="color:white"
+    /       button type="button" class="btn btn-danger"
+    / /         span Reset
+    / div.row
+    /   div.col-md-10.col-md-offset-1
+    /     table#solution-files-table class="table table-striped"
+    / /       tbody
+    / /         tr
+    / div.row
 
 
-    div
-      a href="#" id="audio-upload-button" style="color:white"
-        button type="button" class="btn btn-primary"
-          span Add Audio(s)
-      input type="file" id="audios-upload-field" name="school_document[audios][]" multiple="multiple"
-      a href="#" id="audio-reset-button" style="color:white"
-        button type="button" class="btn btn-danger"
-          span Reset
+    / div
+    /   a href="#" id="audio-upload-button" style="color:white"
+    /     button type="button" class="btn btn-primary"
+    /       span Add Audio(s)
+    /   input type="file" id="audios-upload-field" name="school_document[audios][]" multiple="multiple"
+    /   a href="#" id="audio-reset-button" style="color:white"
+    /     button type="button" class="btn btn-danger"
+    /       span Reset
 
-    table#audio-files-table class="table table-striped"
-      tbody
-        tr
-
-
-
-    br
-    = f.button :submit
+    / table#audio-files-table class="table table-striped"
+    /   tbody
+    /     tr

@@ -4,8 +4,10 @@ html
     title AS DMS
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
+    link href="http://cdn.datatables.net/1.10.3/css/jquery.dataTables.min.css" rel="stylesheet"
+    script src="http://cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"
     = csrf_meta_tags
   body data-no-turbolink="data-no-turbolink"
     == yield
 
-    / # == console
+    # == console
