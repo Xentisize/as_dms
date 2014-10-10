@@ -2,47 +2,63 @@ div.container.school-document-form-container
   h3.text-center School Document
   hr
   = simple_form_for @school_document, multipart: true, role: 'form' do |f|
-    div.row
-      div.form-group
-        div.col-md-3
-          = f.input_field :year, placeholder: "Document Year", label: false, class: 'form-control'
-        div.col-md-3
-          = f.input_field :term, placeholder: "Academic Term (1, 2, 3...)", label: false, class: 'form-control'
-        div.col-md-5
-          = f.input_field :grade, placeholder: "Grade - [Pri] 1-6, [Sec] 7-12, [Uni] 13-16", label: false, class: 'form-control'
+    div.form-group
+        div.row
+          div.col-md-4
+            = f.input_field :year, placeholder: "Document Year", label: false, class: 'form-control'
+          div.col-md-4
+            = f.input_field :term, placeholder: "Academic Term (1, 2, 3...)", label: false, class: 'form-control'
+        div.row
+          div.col-md-4
+            = f.input_field :grade, placeholder: "Grade - [Pri] 1-6, [Sec] 7-12, [Uni] 13-16", label: false, class: 'form-control'
+          div.col-md-4
+            = f.simple_fields_for :student do |s|
+              = s.input :name, label: false, placeholder: "Contributor Name", required: false, input_html: { list: 'students-list', class: 'form-control' }
+              = render 'list_partials/students'
+
     div.row
       div.form-group
         div.col-md-8
-          = f.input :file, :as => "file", placeholder: "Upload Document here", label: "Main Document", input_html: { class: 'file', 'data-show-upload' => 'false', 'data-show-preview' => 'false' }
-          span class="help-block" Only PDF or DOC Documents are supported right now.
+          = f.input :file, :as => "file", label: false, input_html: { class: 'file', 'data-show-upload' => 'false', 'data-show-preview' => 'false' }
+          span class="help-block" Document File: Only PDF or DOC Documents are supported right now.
+
+    div.row
+      div.form-group
+        div.col-md-4
+          = f.association :subject, label: false, input_html: { class: "selectpicker" }
+          span class="help-block" Document Subject
+        div.col-md-4
+          = f.association :format, label: false, input_html: { class: "selectpicker" }
+          span class="help-block" Document Format: Test, Exam, Worksheet ....
 
 
-    = f.association :subject
-    = f.association :format
 
-    = f.simple_fields_for :student do |s|
-      = s.input :name, required: false, input_html: { list: 'students-list' }
-      = render 'list_partials/students'
+    div.row
+      div.form-group
+        = f.simple_fields_for :school do |s|
+          div.col-md-4
+            = s.input :english_name, placeholder: "English School Name", label: false, required: false, input_html: { class: "form-control", list: 'english-schools-list' }
+            = render 'list_partials/english_schools'
+          div.col-md-4
+            = s.input :chinese_name, placeholder: "Chinese School Name", label: false, required: false, input_html: { list: 'chinese-schools-list', class: 'form-control' }
+            = render 'list_partials/chinese_schools'
 
-    = f.simple_fields_for :school do |s|
-      = s.input :english_name, required: false, input_html: { list: 'english-schools-list' }
-      = render 'list_partials/english_schools'
-      = s.input :chinese_name, required: false, input_html: { list: 'chinese-schools-list' }
-      = render 'list_partials/chinese_schools'
+    div.row
+      div.col-md-2
+        a href="#" id="solution-upload-button" style="color:white"
+          button type="button" class="btn btn-primary"
+            span Add Solution(s)
+        input type="file" id="solutions-upload-field" name="school_document[solutions][]" multiple="multiple"
+      div.col-md-1
+        a href="#" id="solution-reset-button" style="color:white"
+          button type="button" class="btn btn-danger"
+            span Reset
+    div.row
+      div.col-md-10.col-md-offset-1
+        table#solution-files-table class="table table-striped"
+          tbody
+            tr
 
-    div
-      a href="#" id="solution-upload-button" style="color:white"
-        button type="button" class="btn btn-primary"
-          span Add Solution(s)
-      input type="file" id="solutions-upload-field" name="school_document[solutions][]" multiple="multiple"
-      a href="#" id="solution-reset-button" style="color:white"
-        button type="button" class="btn btn-danger"
-          span Reset
-
-
-    table#solution-files-table class="table table-striped"
-      tbody
-        tr
 
     div
       a href="#" id="audio-upload-button" style="color:white"
