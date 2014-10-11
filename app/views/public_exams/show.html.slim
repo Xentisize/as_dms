@@ -1,0 +1,47 @@
+div.container#document-details
+  div.row
+    div.col-md-4
+      div.row
+        div.col-md-4.col-md-offset-2
+          h1 Document Details
+      div.row
+        div.col-md-4.col-md-offset-2
+          dl
+            dt Document Year
+            dd = @public_exam.year
+          dl
+            dt Publisher
+            dd = @public_exam.publisher.name
+        div.col-md-4
+          dl
+            dt Document Format
+            dd = @public_exam.format.name
+          dl
+            dt Subject
+            dd = @public_exam.subject.subject
+      div.row
+        div.col-md-4.col-md-offset-2
+          dl
+            dt Question Type
+            == list_question_types(@public_exam)
+      div.row
+        div.col-md-4.col-md-offset-2
+          dl
+            dt Document Files
+            dd = link_to "Processed File", @public_exam.file_location
+            dd = link_to "Original File", @public_exam.file.url
+      div.row
+        div.col-md-4.col-md-offset-2
+          dl
+            dt Solution
+            dd == list_solutions(@public_exam)
+        div.col-md-4
+          dl
+            dt Audio
+            dd == list_audios(@public_exam)
+    div.col-md-8
+      iframe#document-preview src="#{@public_exam.file_location}#zoom=50" width="700px" height="500px" type="application/pdf"
+      div.row
+  div.col-md-2.col-md-offset-10
+    a href="/public_exams" Back
+

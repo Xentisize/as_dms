@@ -1,29 +1,74 @@
+div.container.public-exam-form-container
+  h1.text-center Public Exam
+  hr
+  = simple_form_for @public_exam, multipart: true, role: 'form' do |f|
+    div.row
+      div.form-group
+        div.col-md-4
+          = f.input_field :year, placeholder: "Paper Year", label: false, class: "form-control", min: "1970", max: Time.now.year
+        = f.simple_fields_for :publisher do |p|
+          div.col-md-6
+            = p.input :name, placeholder: "Publisher of the Paper", label: false, class: "form-control", input_html: { list: 'publisher-list', class: 'form-control'}
+            = render 'list_partials/publishers'
+    div.row
+      div.form-group
+        div.col-md-4
+          = f.association :subject, label: false, input_html: { class: "selectpicker" }
+          span class="help-block" Paper Subject
+        div.col-md-4
+          = f.association :format, label: false, input_html: { class: "selectpicker" }
+          span class="help-block" Paper Format: HKCEE, HKALE, HKDSE, MOCK ....
 
-= simple_form_for @public_exam do |f|
-  / # = f.input :name
-  = f.file_field :file
-  = f.input :year
+    div.row
+      div.col-md-6
+        div class="input-group new_question_type_group"
+          input class="string public_exam_question_types form-control" name="public_exam[question_types][1][name]" type="text" list="question_types-list" placeholder="Question Format"
+          span class="input-group-btn"
+            button class="btn btn-default" type="button"
+              a href="#" class="new_question_type"
+                span class="glyphicon glyphicon-plus"
+        span class="help-block" Question Format: MC, Long Question, Short Question ....
+        = render 'list_partials/question_types'
 
-  = f.simple_fields_for :solution do |sf|
-    = sf.file_field :solution_file
+    div.row
+      div.form-group
+        div.col-md-8
+          = f.input :file, :as => "file", label: false, input_html: { class: "file", "data-show-remove" => true, "data-show-upload" => "false", "data-show-preview" => false }
+          span class="help-block" Paper File: Only PDF or DOC or are supported right now.
 
-  = f.association :subject
-  = f.association :format
+    div.row
+      div.col-md-6
+        input type="file" class="file" id="solution-upload-field" name="public_exam[solutions][]" multiple="multiple" data-show-upload="false" data-show-preview="false"
+        span class="help-block" Optional for Answer(s)
+      div.col-md-6
+        input type="file" class="file" name="public_exam[audios][]" multiple="multiple" data-show-upload="false" data-show-preview="false"
+        span class="help-block" Optional for Audio(s)
 
-  = f.simple_fields_for :publisher do |s|
-    = s.input :name, required: false, input_html: { list: 'publishers-list' }
-    = render 'list_partials/publishers'
 
-  div class="input string optional"
-    label class="string optional" for="public_exam_audios" Audios
-    input type="file" class="optional public_exam_audios" name="public_exam[audios][1][audio_file]"
-    = link_to "add", "#", id: "new_audio"
 
-  div class="input string optional"
-    label class="string optional" for="public_exam_question_types_name" Question Type
-    input class="string optional public_exam_question_types" name="public_exam[question_types][1][name]" type="text" list="question_types-list"
-    = link_to "add", "#", id: "new_question_type"
-    = render 'list_partials/question_types'
 
-  br
-  = f.button :submit
+      / = f.simple_fields_for :solution do |sf|
+      /   = sf.file_field :solution_file
+
+
+      / / = f.simple_fields_for :publisher do |s|
+      / /   = s.input :name, required: false, input_html: { list: 'publishers-list' }
+      / /   = render 'list_partials/publishers'
+
+      / div class="input string optional"
+      /   label class="string optional" for="public_exam_audios" Audios
+      /   input type="file" class="optional public_exam_audios" name="public_exam[audios][1][audio_file]"
+      /   = link_to "add", "#", id: "new_audio"
+
+      / div class="input string optional"
+      /   label class="string optional" for="public_exam_question_types_name" Question Type
+      /   input class="string optional public_exam_question_types" name="public_exam[question_types][1][name]" type="text" list="question_types-list"
+      /   = link_to "add", "#", id: "new_question_type"
+      /   = render 'list_partials/question_types'
+
+
+    div.row
+      div.col-md-2.col-md-offset-8
+        = f.button :submit, class: "btn btn-primary"
+      div.col-md-1
+        button type="reset" class="btn btn-danger" Cancel

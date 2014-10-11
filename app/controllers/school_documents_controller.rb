@@ -14,6 +14,7 @@ class SchoolDocumentsController < ApplicationController
 
   def create
     @school_document = SchoolDocument.new(school_document_params)
+
     unless school_document_solution_params[:solutions].blank?
       school_document_solution_params[:solutions].each do |sol|
         @solution = Solution.new

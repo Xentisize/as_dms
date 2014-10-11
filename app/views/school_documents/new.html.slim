@@ -5,12 +5,12 @@ div.container.school-document-form-container
     div.form-group
         div.row
           div.col-md-4
-            = f.input_field :year, placeholder: "Document Year", label: false, class: 'form-control'
+            = f.input_field :year, placeholder: "Document Year", label: false, class: 'form-control', min: '1970', max: Time.now.year
           div.col-md-4
-            = f.input_field :term, placeholder: "Academic Term (1, 2, 3...)", label: false, class: 'form-control'
+            = f.input_field :term, placeholder: "Academic Term (1, 2, 3...)", label: false, class: 'form-control', min: '1', max: '5'
         div.row
           div.col-md-4
-            = f.input_field :grade, placeholder: "Grade - [Pri] 1-6, [Sec] 7-12, [Uni] 13-16", label: false, class: 'form-control'
+            = f.input_field :grade, placeholder: "Grade - [Pri] 1-6, [Sec] 7-12, [Uni] 13-16", label: false, class: 'form-control', min: 1, max: 16
           div.col-md-4
             = f.simple_fields_for :student do |s|
               = s.input :name, label: false, placeholder: "Contributor Name", required: false, input_html: { list: 'students-list', class: 'form-control' }

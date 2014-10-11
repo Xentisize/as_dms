@@ -1,21 +1,20 @@
 div.container
-    table class="table table-striped table-bordered"
-      thead
-        td Year
-        td Publisher
-        td Subject
-        td Format
-        td File
-      tbody
-        - @public_exams.each do |pe|
-          tr
-            / # td = pe.name
-            td = pe.year
-            td = pe.publisher.name
+    table id="public-exams-table"
+        thead
+            tr
+                th File
+                th Publisher
+                th Subject
+                th Year
+                th Solution
+                th Audio
+        tbody
+            - @public_exams.each do |pe|
+                tr
+                    td <a href="/public_exams/#{pe.id}"><span class="glyphicon glyphicon-file"></span></a>
+                    td = pe.publisher.name
+                    td = pe.subject.subject
+                    td = pe.year
+                    td == has_solutions?(pe)
+                    td == has_audios?(pe)
 
-            td = pe.subject.subject
-            td = pe.format.name
-            / # td = sd.question_types.first.name
-            / # td = sd.categories.first.name
-            td = link_to "open", "#{pe.file.url}"
-            td = link_to "open 2", "#{pe.file_location}"

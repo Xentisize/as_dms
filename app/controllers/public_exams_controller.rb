@@ -10,40 +10,31 @@ class PublicExamsController < ApplicationController
     @public_exam.build_publisher
   end
 
+  def show
+    @public_exam = PublicExam.find(params[:id])
+  end
+
   def create
     @public_exam = PublicExam.new(public_exam_params)
+
 
     unless public_exam_subject_params[:subject_id].blank?
       @public_exam.subject = Subject.find_or_create_by(id: public_exam_subject_params[:subject_id])
     end
 
-    logger.info "!!!!!!!!#{public_exam_audio_params[:audios][1]}"
-
-
     unless public_exam_audio_params.blank?
-      if public_exam_audio_params[:audios].size > 0
-
-        if public_exam_audio_params[:audios].size == 1
-          audio = Audio.new
-          audio.audio_file = public_exam_audio_params[:audios]["1"][:audio_file]
-          @public_exam.audios << audio
-        else
-          public_exam_audio_params[:audios].values.each do |a|
-            audio = Audio.new
-            audio.audio_file = a[:audio_file]
-            @public_exam.audios << audio
-          end
-        end
+      public_exam_audio_params[:audios].each do |audio|
+        @audio = Audio.new
+        @audio.audio_file = audio
+        @public_exam.audios << @audio
       end
     end
 
-
-
-    unless public_exam_solution_params[:solution].blank?
-      @solution = Solution.new
-      @solution.solution_file = public_exam_solution_params[:solution][:solution_file]
-      if @solution.save
-        @public_exam.solution = @solution
+    unless public_exam_solution_params[:solutions].blank?
+      public_exam_solution_params[:solutions].each do |sol|
+        @solution = Solution.new
+        @solution.solution_file = sol
+        @public_exam.solutions << @solution
       end
     end
 
@@ -53,7 +44,8 @@ class PublicExamsController < ApplicationController
 
     unless public_exam_publisher_params.blank?
       @public_exam.publisher = Publisher.find_or_create_by(name: public_exam_publisher_params[:publisher][:name])
-  end
+      logger.info "!!!!!!!!!!!!#{@public_exam.publisher}"
+    end
 
     if @public_exam.save
       redirect_to public_exams_path
@@ -74,7 +66,12 @@ class PublicExamsController < ApplicationController
   end
 
   def public_exam_params
+    # logger.info "!!!!!!! inside public_exam_params:\n#{params.require(:public_exam).permit(:file => [])}"
     params.require(:public_exam).permit(:year, :file)
+  end
+
+  def public_exam_file_params
+    params.require(:public_exam).permit(:file => [])
   end
 
   def public_exam_subject_params
@@ -82,11 +79,11 @@ class PublicExamsController < ApplicationController
   end
 
   def public_exam_solution_params
-    params.require(:public_exam).permit(:solution => [:solution_file])
+    params.require(:public_exam).permit(:solutions => [])
   end
 
   def public_exam_audio_params
-    params.require(:public_exam).permit(:audios => [:audio_file])
+    params.require(:public_exam).permit(:audios => [])
   end
 
   def public_exam_format_params
@@ -94,6 +91,7 @@ class PublicExamsController < ApplicationController
   end
 
   def public_exam_publisher_params
+    logger.info "!!!!!!!! Insode publisher: #{   params.require(:public_exam).permit(:publisher => [:name])}"
     params.require(:public_exam).permit(:publisher => [:name])
   end
 end

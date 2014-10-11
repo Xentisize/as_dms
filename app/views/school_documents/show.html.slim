@@ -1,16 +1,59 @@
-- doc = @school_document
-= doc.year
-br
-= doc.subject.subject
-br
-= doc.student.name
-br
-= doc.term
-br
-= doc.grade
-br
-- doc.solutions.each do |s|
-  = link_to "Solution", s.solution_file.url
+div.container#document-details
+  div.row
+    div.col-md-4
+      div.row
+        div.col-md-4.col-md-offset-2
+          h1 Document Details
+      div.row
+        div.col-md-4.col-md-offset-2
+          dl
+            dt Document Year
+            dd = @school_document.year
+          dl
+            dt Grade
+            dd = @school_document.grade
+          dl
+            dt Term
+            dd = @school_document.term
+        div.col-md-4
+          dl
+            dt Document Format
+            dd = @school_document.format.name
+          dl
+            dt Subject
+            dd = @school_document.subject.subject
+          dl
+            dt Contributor
+            dd = @school_document.student.name
+      div.row
+        div.col-md-4.col-md-offset-2
+          dl
+            dt Categories
+            == list_categories(@school_document)
+        div.col-md-4
+          dl
+            dt Question Type
+            == list_question_types(@school_document)
+      div.row
+        div.col-md-4.col-md-offset-2
+          dl
+            dt Document Files
+            dd = link_to "Processed File", @school_document.file_location
+            dd = link_to "Original File", @school_document.file.url
+      div.row
+        div.col-md-4.col-md-offset-2
+          dl
+            dt Solution
+            dd == list_solutions(@school_document)
+        div.col-md-4
+          dl
+            dt Audio
+            dd == list_audios(@school_document)
+    div.col-md-8
+        iframe#document-preview src="#{@school_document.file_location}#zoom=50" width="700px" height="500px" type="application/pdf"
 
-- doc.audios.each do |a|
-  = link_to "Audio", a.audio_file.url
+
+  div.row
+    div.col-md-2.col-md-offset-10
+      a href="/school_documents" Back
+

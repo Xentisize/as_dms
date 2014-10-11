@@ -31,5 +31,5 @@ end
 school_file_path = Rails.root.join("db")
 File.open("#{school_file_path}/school.txt").each do |l|
   school = l.split(",")
-  School.find_or_create_by(english_name: school[0], chinese_name: school[1].lstrip.chomp)
+  School.find_or_create_by(english_name: school[0].gsub(".", ""), chinese_name: school[1].lstrip.chomp)
 end

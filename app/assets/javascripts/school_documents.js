@@ -61,6 +61,19 @@ $(function() {
   $("#school-documents-table").DataTable();
 });
 
+$(function() {
+  $("div#document-details a").each(function() {
+    if ($(this).attr("href").indexOf("pdf") !== -1) {
+      var url = $(this).attr("href");
+      $(this).click(function(evt) {
+        evt.preventDefault();
+        var pdf = "<iframe id='document-preview' src='" + url + "#zoom=50' width='700px' height='600px' type='application/pdf'>"
+        console.log(pdf);
+        $("#document-preview").replaceWith($(pdf));
+      });
+    }
+  });
+});
 
 // // Hide the solution input file fields
 // $(function() {
