@@ -1,4 +1,5 @@
 class SchoolDocument < ActiveRecord::Base
+  searchkick
   belongs_to :subject
   belongs_to :student
   belongs_to :school
@@ -13,5 +14,16 @@ class SchoolDocument < ActiveRecord::Base
 
   include WatermarkDocument
   after_save :watermarked_school_document
+
+  def search_data
+    {
+      content: extract_content
+    }
+  end
+
+  def extract_content
+    yomu = Yomu.new file.path
+    text = yomu.text
+  end
 
 end

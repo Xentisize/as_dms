@@ -1,4 +1,5 @@
 class PublicExam < ActiveRecord::Base
+  searchkick
   belongs_to :format
   belongs_to :subject
   belongs_to :publisher
@@ -10,4 +11,15 @@ class PublicExam < ActiveRecord::Base
 
   include WatermarkDocument
   after_save :watermarked_public_exam
+
+  def search_data
+    {
+      content: extract_content
+    }
+  end
+
+  def extract_content
+    yomu = Yomu.new file.path
+    text = yomu.text
+  end
 end

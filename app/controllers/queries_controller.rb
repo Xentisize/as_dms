@@ -11,4 +11,29 @@ class QueriesController < ApplicationController
     end
   end
 
+  def index
+  end
+
+  def search
+    if params[:queries][:school].present?
+      result = SchoolDocument.search(params[:queries][:school])
+      if result.size > 0
+        result_ids = result.map(&:id)
+      end
+      result_ids
+    end
+
+    redirect_to :controller => "queries", :action => "results", :ids => result_ids
+  end
+
+  def results
+    if params[:ids]
+      @result = []
+      params[:ids].each do |r|
+        @result << SchoolDocument.find(r)
+      end
+    end
+    @results
+  end
+
 end
