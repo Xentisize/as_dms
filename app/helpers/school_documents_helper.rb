@@ -57,4 +57,32 @@ module SchoolDocumentsHelper
     output_html
   end
 
+  def show_field(field)
+    if field.nil?
+      "<span>Not specified</span>"
+    else
+      "<span>#{field}</span>"
+    end
+  end
+
+  def display_grade(grade)
+    case grade
+    when 0
+      "<span>Not specified<span>"
+    when 1..6
+      "<span>P#{grade}</span>"
+    when 7..12
+      "<span>S#{grade - 6}</span>"
+    when 13..16
+      "<span>U#{grade - 12}</span>"
+    end
+  end
+
+  # def display_subject(document)
+  #   if document.subject.nil?
+  #     "<span>"
+
+
+
+
 end

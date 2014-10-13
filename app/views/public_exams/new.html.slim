@@ -8,7 +8,7 @@ div.container.public-exam-form-container
           = f.input_field :year, placeholder: "Paper Year", label: false, class: "form-control", min: "1970", max: Time.now.year
         = f.simple_fields_for :publisher do |p|
           div.col-md-6
-            = p.input :name, placeholder: "Publisher of the Paper", label: false, class: "form-control", input_html: { list: 'publisher-list', class: 'form-control'}
+            = p.input :name, placeholder: "Publisher of the Paper", label: false, class: "form-control", input_html: { list: 'publishers-list', class: 'form-control'}
             = render 'list_partials/publishers'
     div.row
       div.form-group

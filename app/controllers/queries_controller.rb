@@ -27,12 +27,14 @@ class QueriesController < ApplicationController
   end
 
   def results
+    logger.info params[:ids]
     if params[:ids]
-      @result = []
+      @results = []
       params[:ids].each do |r|
-        @result << SchoolDocument.find(r)
+        @results << SchoolDocument.find(r)
       end
     end
+
     @results
   end
 

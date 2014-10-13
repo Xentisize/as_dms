@@ -33,7 +33,7 @@ module WatermarkDocument
     copy_file_for_process
     tmp_to_png
     generate_qr_code("SD-#{id}", {height: 150, width: 150})
-    generate_label(generate_label_texts("SD", ""))
+    generate_label(generate_label_texts("SD", categories))
     stamp_png_files
     to_pdf
     update_column(:file_location, @file_location.to_path)
@@ -95,16 +95,16 @@ module WatermarkDocument
     png.resize(size[:height], size[:width]).save("#{@qr_path}/#{@tmp_file_identifier}-qr.png")
   end
 
-  def generate_label_texts(format, categories="")
+  def generate_label_texts(format, categories)
     @file_id = "#{format}-#{id}"
-    @label_string = "ID: #{@file_id}"
-    # if categories.exist?
-    # if categories.size > 0
-    #   @categories_string = categories.map { |c| c.name }
-    #   @label_string = "ID: #{@file_id}\nCategories: " + @categories_string.join(", ")
-    # else
-    #   @label_string = "ID: #{@file_id}\nCategories: Unspecifed"
-    # end
+
+    unless categories.size == 0
+      @categories_collection = categories.map {|c| c.name }
+      @categories_name = @categories_collection.join(", ")
+    else
+      @categories_name = "Not specified"
+    end
+    @label_string = "ID: #{@file_id}\nCategories: #{@categories_name[0..40]}"
   end
 
   def generate_label(contents)

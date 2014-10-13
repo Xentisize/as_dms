@@ -13,7 +13,15 @@ class SchoolDocumentsController < ApplicationController
   end
 
   def create
-    @school_document = SchoolDocument.new(school_document_params)
+    @school_document = SchoolDocument.new(school_document_file_params)
+
+    school_document_params.each do |key, val|
+      if val.empty?
+        @school_document[key] = "Not Specified"
+      else
+        @school_document[key] = val
+      end
+    end
 
     unless school_document_solution_params[:solutions].blank?
       school_document_solution_params[:solutions].each do |sol|
@@ -31,12 +39,17 @@ class SchoolDocumentsController < ApplicationController
       end
     end
 
-    unless school_document_subject_params[:subject_id].blank?
+    if school_document_subject_params[:subject_id].empty?
+      @school_document.subject = Subject.find_or_create_by(subject: "Not specified")
+    else
       @school_document.subject = Subject.find_or_create_by(id: school_document_subject_params[:subject_id])
     end
 
+
     unless school_document_format_params[:format_id].blank?
       @school_document.format = Format.find_by(id: school_document_format_params[:format_id])
+    else
+      @school_document.format = Format.find_by(name: "Not Specified")
     end
 
     unless school_document_student_params[:student][:name].blank?
@@ -73,12 +86,18 @@ class SchoolDocumentsController < ApplicationController
           @school_document.school = chinese_school
         end
       end
+    else
+      @school_document.school = School.find_by(english_name: "Not Specified")
     end
 
-    if @school_document.save
-      redirect_to school_documents_path
-    else
-      render :new
+    respond_to do |format|
+      if @school_document.save
+        format.html do
+          redirect_to school_documents_path, notice: "Document was successfully created."
+        end
+      else
+      f ormat.html { render :new }
+      end
     end
   end
 
@@ -93,7 +112,11 @@ class SchoolDocumentsController < ApplicationController
   end
 
   def school_document_params
-    params.require(:school_document).permit(:name, :year, :term, :grade, :file)
+    params.require(:school_document).permit(:name, :year, :term, :grade)
+  end
+
+  def school_document_file_params
+    params.require(:school_document).permit(:file)
   end
 
   def school_document_solution_params

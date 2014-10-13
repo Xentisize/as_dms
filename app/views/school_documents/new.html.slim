@@ -2,6 +2,12 @@ div.container.school-document-form-container
   h1.text-center School Document
   hr
   = simple_form_for @school_document, multipart: true, role: 'form' do |f|
+    - if @school_document.errors.any?
+      div id='error_explanation'
+        ul
+          - @school_document.errors.full_messages.each do |message|
+            li = message
+
     div.form-group
         div.row
           div.col-md-4
@@ -10,7 +16,7 @@ div.container.school-document-form-container
             = f.input_field :term, placeholder: "Academic Term (1, 2, 3...)", label: false, class: 'form-control', min: '1', max: '5'
         div.row
           div.col-md-4
-            = f.input_field :grade, placeholder: "Grade - [Pri] 1-6, [Sec] 7-12, [Uni] 13-16", label: false, class: 'form-control', min: 1, max: 16
+            = f.input_field :grade, placeholder: "Grade - [All] 0, [Pri] 1-6, [Sec] 7-12, [Uni] 13-16", label: false, class: 'form-control', min: 0, max: 16
           div.col-md-4
             = f.simple_fields_for :student do |s|
               = s.input :name, label: false, placeholder: "Contributor Name", required: false, input_html: { list: 'students-list', class: 'form-control' }
