@@ -49,11 +49,13 @@ div.container#document-details
           dl
             dt Audio
             dd == list_audios(@school_document)
+      div.row
+        div.col-md-2.col-md-offset-10
+        a href="/school_documents" Back
+
     div.col-md-8
-        iframe#document-preview src="#{@school_document.file_location}#zoom=50" width="700px" height="500px" type="application/pdf"
+      div.row
+        iframe id="viewer" src="/pdfjs/web/viewer.html?file=#{@school_document.file.url}" width="800px" height="600px" allowfullscreen="allowfullscreen" webkitallowfullscreen="webkitallowfullscreen"
 
 
-  div.row
-    div.col-md-2.col-md-offset-10
-      a href="/school_documents" Back
 

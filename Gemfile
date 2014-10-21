@@ -46,6 +46,9 @@ gem 'delayed_job_active_record'
 gem 'autoprefixer-rails'
 gem 'searchkick'
 gem 'yomu'
+gem 'fog'
+
+gem 'pdfjs-rails-engine', github: "normancapule/pdfjs-rails-engine"
 # gem 'image_optim'
 
 # Use ActiveModel has_secure_password

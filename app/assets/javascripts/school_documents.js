@@ -67,9 +67,10 @@ $(function() {
       var url = $(this).attr("href");
       $(this).click(function(evt) {
         evt.preventDefault();
-        var pdf = "<iframe id='document-preview' src='" + url + "#zoom=50' width='700px' height='600px' type='application/pdf'>"
+        var pdf = "<iframe id='viewer' src='/pdfjs/web/viewer.html?file=" + url + "' width='800px' height='" + (screen.height - 30) + "px' allowfullscreen webkitallowfullscreen>"
+        // var pdf = "<iframe id='document-preview' src='" + url + "#zoom=50' width='700px' height='600px' type='application/pdf'>"
         console.log(pdf);
-        $("#document-preview").replaceWith($(pdf));
+        $("#viewer").replaceWith($(pdf));
       });
     }
   });

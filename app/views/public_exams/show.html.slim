@@ -1,8 +1,8 @@
 div.container#document-details
   div.row
-    div.col-md-4
+    div.col-md-4.col-sm-2
       div.row
-        div.col-md-4.col-md-offset-2
+        div.col-md-4
           h1 Document Details
       div.row
         div.col-md-4.col-md-offset-2
@@ -39,9 +39,9 @@ div.container#document-details
           dl
             dt Audio
             dd == list_audios(@public_exam)
-    div.col-md-8
-      iframe#document-preview src="#{@public_exam.file_location}#zoom=50" width="700px" height="500px" type="application/pdf"
+    div.col-md-8.col-sm-8
       div.row
+        iframe id="viewer" src="/pdfjs/web/viewer.html?file=#{@school_document.file.url}" width="800px" height="600px" allowfullscreen="allowfullscreen" webkitallowfullscreen="webkitallowfullscreen"
   div.col-md-2.col-md-offset-10
     a href="/public_exams" Back
 

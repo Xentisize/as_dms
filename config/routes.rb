@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'queries/search'
   get 'queries/results'
 
+  mount PdfjsRailsEngine::Engine, at: "pdf"
+
   # get 'school_documents/new_category_path', to: "school_documents#new_category_field"
 
   resources :school_documents
