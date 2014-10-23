@@ -20,6 +20,7 @@ class QueriesController < ApplicationController
       if result.size > 0
         result_ids = result.map(&:id)
       end
+      logger.info "In search method: #{result_ids}"
       result_ids
     end
 
@@ -32,9 +33,10 @@ class QueriesController < ApplicationController
       @results = []
       params[:ids].each do |r|
         @results << SchoolDocument.find(r)
+        logger.info @results
       end
     end
-
+    logger.info @results
     @results
   end
 

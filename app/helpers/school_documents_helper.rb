@@ -40,8 +40,12 @@ module SchoolDocumentsHelper
     output_html = ""
     if document.solutions.size > 0
       document.solutions.each do |s|
-        output_html << "<dd><a href='#{s.solution_file.url}'>Solution File</a></dd>"
+        output_html << "<dd>"
+        output_html << "<a href='#{s.solution_file.url}'>Solution File</a>"
         # link_to "Solution File", s.solution_file.url
+        output_html << "<a href='#' class='printing-doc' data-toggle='modal' data-target='#printing-params-modal' data-doc-url='#{Rails.root}/public/#{s.solution_file.url}'>"
+        output_html << "<span class='glyphicon glyphicon-print'></span>"
+        output_html << "</dd>"
       end
     end
     output_html

@@ -67,15 +67,39 @@ $(function() {
       var url = $(this).attr("href");
       $(this).click(function(evt) {
         evt.preventDefault();
-        var pdf = "<iframe id='viewer' src='/pdfjs/web/viewer.html?file=" + url + "' width='800px' height='" + (screen.height - 30) + "px' allowfullscreen webkitallowfullscreen>"
+        var pdf = "<iframe id='viewer' src='/pdf/generic/web/viewer.html?file=" + url + "' width='800px' height='" + (screen.height - 30) + "px' allowfullscreen webkitallowfullscreen>"
         // var pdf = "<iframe id='document-preview' src='" + url + "#zoom=50' width='700px' height='600px' type='application/pdf'>"
-        console.log(pdf);
+        // console.log(pdf);
         $("#viewer").replaceWith($(pdf));
       });
     }
   });
 });
 
+$(function() {
+  $("#viewer").attr("height", screen.height);
+});
+
+$(function() {
+  $("a.printing-doc").click(function(evt) {
+    var doc_url = $(this).attr("data-doc-url");
+    $("input.document-path-field").val(doc_url);
+  });
+});
+
+// $(function() {
+//   $("a.printing-doc").click(function(evt) {
+//     evt.preventDefault();
+//     var printing_doc_url = $(this).attr("href");
+//     $("#pdf-for-print").attr("src", printing_doc_url);
+//     var doc = document.getElementById("pdf-for-print");
+//     console.log("DOC: ");
+//     console.log(doc);
+//     doc.focus();
+//     doc.contentWindow.print();
+//     // $("#pdf-for-print").focus().contentWindow.print();
+//   });
+// });
 // // Hide the solution input file fields
 // $(function() {
 //   // $("#solutions-upload-field").css("visibility", "hidden");

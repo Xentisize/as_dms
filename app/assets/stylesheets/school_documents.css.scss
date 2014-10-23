@@ -2,23 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap";
-// #solutions-upload-field {
-//   visibility: hidden;
-// }
 
-// #audios-upload-field {
-//   visibility: hidden;
-// }
 
 .school-document-form-container {
   margin-top: 30px;
   border-radius: 10px;
   border: 2px solid rgb(66, 139, 202);
   padding: 10px;
-  // div.heading {
-  //   margin-top: 0px;
-  //   background-color: blue;
-  // }
 }
 
 .school-document-form-container div.row {
@@ -32,4 +22,7 @@
   padding: 10px;
 }
 
+a.printing-doc span {
+  margin-left: 5px;
+}
 

@@ -40,6 +40,7 @@ class SchoolDocumentsController < ApplicationController
     end
 
     if school_document_subject_params[:subject_id].empty?
+      # logger.info "XXXXXXXXXXX #{school_document_subject_params[:subject_id]}"
       @school_document.subject = Subject.find_or_create_by(subject: "Not specified")
     else
       @school_document.subject = Subject.find_or_create_by(id: school_document_subject_params[:subject_id])
