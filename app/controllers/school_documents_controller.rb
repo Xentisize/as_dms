@@ -104,6 +104,9 @@ class SchoolDocumentsController < ApplicationController
 
   def show
     @school_document = SchoolDocument.find(params[:id])
+    printers = `lpstat -p -d`
+    printer_list = printers.split("\n").select {|p| p =~ /^printer/ }
+    @printers = printer_list.collect {|p| p.split(" ")[1] }
   end
 
   private

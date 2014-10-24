@@ -87,6 +87,17 @@ $(function() {
   });
 });
 
+$(function() {
+  $("option").each(function() {
+    if ($(this).val() == "CanonMF4800") {
+      $(this).attr("selected", "selected");
+    }
+  });
+});
+
+$(function() {
+  setTimeout("$('div.alert-info').hide();", 3000);
+});
 // $(function() {
 //   $("a.printing-doc").click(function(evt) {
 //     evt.preventDefault();

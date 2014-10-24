@@ -1,6 +1,18 @@
 div.container
   div.row
     form role="search" action="search" method="get"
+      div class="form-group hidden"
+        div#reader style="width:300px; height: 250px"
+      div class="form-group"
+        input type="file" accept="image/*" capture="camera"
+      div class="form-group"
+        input type="text" class="form-control" placeholder="Document ID" name="queries[id]"
       div class="form-group"
         input type="text" class="form-control" placeholder="Search School" name="queries[school]"
+      div class="form-group"
+        input type="text" class="form-control" placeholder="Category" name="queries[category]"
+      div class="form-group"
+        input type="text" class="form-control" placeholder="Subject" name="queries[subject]"
+      div class="form-group"
+
       button type="submit" class="btn btn-default" Search

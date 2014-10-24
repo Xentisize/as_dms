@@ -4,7 +4,12 @@ class PrintController < ApplicationController
   def to_printer
     parameters = print_params
 
-    print_command = "lpr -P CanonMF4800 -o fit-to-page -o media=A4 "
+    print_command = "lpr -o fit-to-page -o media=A4 "
+
+    if parameters[:printer].present?
+      print_command << "-P #{parameters[:printer]} "
+    end
+
     if parameters[:duplex].present?
       print_command << "-o sides=two-sided-long-edge "
     end
@@ -17,21 +22,14 @@ class PrintController < ApplicationController
 
     print_command << parameters[:path]
 
-    # logger.info "XXXXXXXX #{print_command}"
+    logger.info "XXXXXXXX #{print_command}"
     `#{print_command}`
-    redirect_to school_document_url(parameters[:id])
-
-
-
-
-    # @document_path = "/Volumes/Data/WS/rails_project/as_dms/public/store/files/8402344c22412ef401198539bed23a5b22a3c8f9.pdf"
-    # `lpr -o fit-to-page -o media=A4 #{@document_path}`
-    # redirect_to
+    redirect_to school_document_url(parameters[:id]), notice: "Document Printed"
   end
 
   private
 
   def print_params
-    params.require(:print).permit(:page, :copies, :duplex, :path, :id)
+    params.require(:print).permit(:page, :copies, :duplex, :path, :id, :printer)
   end
 end
