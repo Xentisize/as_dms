@@ -44,7 +44,7 @@ module SchoolDocumentsHelper
         output_html << "<a href='#{s.solution_file.url}'>Solution File</a>"
         # link_to "Solution File", s.solution_file.url
         output_html << "<a href='#' class='printing-doc' data-toggle='modal' data-target='#printing-params-modal' data-doc-url='#{Rails.root}/public/#{s.solution_file.url}'>"
-        output_html << "<span class='glyphicon glyphicon-print'></span>"
+        output_html << "<span class='glyphicon glyphicon-print'></span></a>"
         output_html << "</dd>"
       end
     end

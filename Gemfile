@@ -48,7 +48,7 @@ gem 'searchkick'
 gem 'yomu'
 gem 'fog'
 
-gem 'pdfjs-rails-engine', github: "normancapule/pdfjs-rails-engine"
+# gem 'pdfjs-rails-engine', github: "normancapule/pdfjs-rails-engine"
 # gem 'image_optim'
 
 # Use ActiveModel has_secure_password
@@ -62,4 +62,3 @@ gem 'pdfjs-rails-engine', github: "normancapule/pdfjs-rails-engine"
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-

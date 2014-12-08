@@ -1,2 +1,5 @@
-- @results.each do |r|
-  p = r.id
+- if @results
+  - @results.each do |r|
+    p = r.id
+    p = r
+    / # p = r.id

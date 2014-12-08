@@ -3,6 +3,7 @@ div.container
       thead
         tr
             th File
+            th ID
             th School
             th Subject
             th Format
@@ -16,6 +17,7 @@ div.container
         - @school_documents.each do |sd|
           tr
             td <a href="/school_documents/#{sd.id}"><span class='glyphicon glyphicon-file'></span></a>
+            td == sd.id
             td == display_school(sd)
             td == show_field(sd.subject.subject)
             td == show_field(sd.format.name)

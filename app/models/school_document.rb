@@ -1,5 +1,5 @@
 class SchoolDocument < ActiveRecord::Base
-  searchkick
+  searchkick word_start: [:content]
   belongs_to :subject
   belongs_to :student
   belongs_to :school

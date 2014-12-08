@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-subjects = %w(Chinese English Mathematics Physics Chemistry Biology IS LS Economics Accounts)
+subjects = %w(Chinese English Mathematics Physics Chemistry Biology IS LS Economics Accounts Geography History Computer) << "Chinese History" << "English Literature"
 students = ["Jason Law", "Russell Mak", "Andix Chan", "Karinna Lai"]
 formats = ["Worksheet", "Test", "Exam", "Mock", "DSE", "HKCEE", "HKALE", "IELTS", "GCSE", "IB", "Others", "Not Specified"]
 question_types = ["MC", "Long Questions", "Short Questions", "Open-ended Questions", "Fill in the Blank", "Short Answer", "Long Answer"]

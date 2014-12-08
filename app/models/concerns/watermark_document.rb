@@ -32,8 +32,8 @@ module WatermarkDocument
     check_or_empty_dirs
     copy_file_for_process
     tmp_to_png
-    generate_qr_code("SD-#{id}", {height: 150, width: 150})
-    generate_label(generate_label_texts("SD", categories))
+    generate_qr_code("SD-#{id}", {height: 200, width: 200})
+    generate_label(generate_label_texts("SD"))
     stamp_png_files
     to_pdf
     update_column(:file_location, @file_location.to_path)
@@ -46,7 +46,7 @@ module WatermarkDocument
     copy_file_for_process
     tmp_to_png
     generate_qr_code("PE-#{id}", {height: 150, width: 150})
-    generate_label(generate_label_texts("PE", ""))
+    # generate_label(generate_label_texts("PE", ""))
     stamp_png_files
     to_pdf
     update_column(:file_location, @file_location.to_path)
@@ -95,20 +95,20 @@ module WatermarkDocument
     png.resize(size[:height], size[:width]).save("#{@qr_path}/#{@tmp_file_identifier}-qr.png")
   end
 
-  def generate_label_texts(format, categories)
+  def generate_label_texts(format)
     @file_id = "#{format}-#{id}"
 
-    unless categories.size == 0
-      @categories_collection = categories.map {|c| c.name }
-      @categories_name = @categories_collection.join(", ")
-    else
-      @categories_name = "Not specified"
-    end
-    @label_string = "ID: #{@file_id}\nCategories: #{@categories_name[0..40]}"
+    # unless categories.size == 0
+    #   @categories_collection = categories.map {|c| c.name }
+    #   @categories_name = @categories_collection.join(", ")
+    # else
+    #   @categories_name = "Not specified"
+    # end
+    @label_string = "ID: #{@file_id}\n"
   end
 
   def generate_label(contents)
-    canvas = Magick::Image.new(800, 300) do
+    canvas = Magick::Image.new(100, 100) do
       self.background_color = "none"
     end
     gc = Magick::Draw.new
@@ -122,10 +122,10 @@ module WatermarkDocument
   def stamp_png_files
     qr_x_coord = 20
     qr_y_coord = 20
-    label_x_coord = qr_x_coord + 150
+    label_x_coord = qr_x_coord + 250
     label_y_coord = qr_y_coord
 
-    png_files = Dir.glob("#{@png_path}/*.*")
+    png_files = Dir.glob("#{@png_path}/*.*").sort
     # image_optim = ImageOptim.new
     # png_files.each do |png|
     #   image_optim.optimize_image!(png)
@@ -144,7 +144,7 @@ module WatermarkDocument
   end
 
   def to_pdf
-    marked_png_files = Dir.glob("#{@marked_png_path}/*.*")
+    marked_png_files = Dir.glob("#{@marked_png_path}/*.*").sort
     image_lists = Magick::ImageList.new(*marked_png_files)
     image_lists.write("#{@pdf_path}/#{@original_file.file.filename}")
   end

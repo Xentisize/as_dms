@@ -1,18 +1,36 @@
 div.container
   div.row
     form role="search" action="search" method="get"
-      div class="form-group hidden"
-        div#reader style="width:300px; height: 250px"
-      div class="form-group"
-        input type="file" accept="image/*" capture="camera"
       div class="form-group"
         input type="text" class="form-control" placeholder="Document ID" name="queries[id]"
       div class="form-group"
-        input type="text" class="form-control" placeholder="Search School" name="queries[school]"
+        input type="text" class="form-control" placeholder="Search School" name="queries[school]" list="english-schools-list"
+        = render 'list_partials/english_schools'
       div class="form-group"
-        input type="text" class="form-control" placeholder="Category" name="queries[category]"
+        input type="text" class="form-control" placeholder="Category" name="queries[category]" list="question_types-list"
+        = render 'list_partials/question_types'
       div class="form-group"
-        input type="text" class="form-control" placeholder="Subject" name="queries[subject]"
+        select name="queries[subject]" class="subjectPicker" data-live-search="true" multiple="multiple" title="Select Subject"
+          - Subject.all.each do |s|
+            option value="#{s.subject}" #{s.subject}
+
+        / input type="text" class="form-control" placeholder="Subject" name="queries[subject]"
       div class="form-group"
+        input type="text" class="form-control" placeholder="Grade: 1-6 (Primary) 7-12 (Secondary) 0 (Not Specified)" name="queries[grade]"
+      div class="form-group"
+        input type="text" class="form-control" placeholder="Contributor's name" name="queries[contributor]" list="students-list"
+        = render 'list_partials/students'
+      div class="form-group"
+        input type="text" class="form-control" placeholder="Term: 0 (Unspecified), 1, 2, 3" name="queries[term]"
+      div class="form-group"
+        select name="queries[format]" class="formatPicker" data-live-search="true" multiple="multiple" title="Select Format"
+
+          - Format.all.each do |f|
+            option value="#{f.name}" #{f.name}
+        / input type="text" class="form-control" placeholder="Format: Test, Exam, Worksheet" name="queries[format]"
+      div class="form-group"
+        input type="text" class="form-control" placeholder="Year of Document" name="queries[year]"
+      div class="form-group"
+        input type="text" class="form-control" placeholder="Full-text Search: Keywords with space" name="queries[content]"
 
       button type="submit" class="btn btn-default" Search

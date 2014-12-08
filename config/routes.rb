@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # get 'print/to_printer'
   post 'print/to_printer'
 
-  mount PdfjsRailsEngine::Engine, at: "pdf"
+  # mount PdfjsRailsEngine::Engine, at: "pdf"
 
   # get 'school_documents/new_category_path', to: "school_documents#new_category_field"
 

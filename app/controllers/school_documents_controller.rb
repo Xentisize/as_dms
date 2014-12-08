@@ -88,7 +88,7 @@ class SchoolDocumentsController < ApplicationController
         end
       end
     else
-      @school_document.school = School.find_by(english_name: "Not Specified")
+      @school_document.school = School.find_by(english_name: "Not specified")
     end
 
     respond_to do |format|

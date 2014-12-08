@@ -1,11 +1,20 @@
+// function read(data) {
+//   $("#qr-value").text(data);
+// }
+//
+// qrcode.callback = read;
+//
+//
 // $(function() {
-//   $("#reader").html5_qrcode(function(data) {
-//     console.log(data);
-//   },
-//   function(error) {
-//     console.log(error);
-//   },
-//   function(videoError) {
-//     console.log(videoError);
-//   });
-// });
+//   navigator.getUserMedia = navigator.webkitGetUserMedia;
+//
+//   var cam_video_id = "camsource";
+//
+//   window.addEventListener
+// })
+
+$(function() {
+  $(".subjectPicker").selectpicker();
+  // $(".subjectPicker").prop("selectedIndex", -1);
+  $(".formatPicker").selectpicker();
+});
