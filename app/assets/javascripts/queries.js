@@ -18,3 +18,13 @@ $(function() {
   // $(".subjectPicker").prop("selectedIndex", -1);
   $(".formatPicker").selectpicker();
 });
+
+
+$(function() {
+  $("body").on("keydown", function(event) {
+    if (event.which == "27") {
+      // $("#reset-fields").click();
+      location.reload();
+    }
+  });
+});

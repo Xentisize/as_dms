@@ -92,6 +92,13 @@ class QueriesController < ApplicationController
         results = results.where(year: params[:queries][:year])
       end
 
+      if params[:queries][:content].present?
+        search_results_id = SchoolDocument.search(params[:queries][:content]).map(&:id)
+        results = results.where(id: search_results_id)
+      end
+
+
+
     end
 
     results_ids = results.map {|sd| sd.id}

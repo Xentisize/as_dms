@@ -1,36 +1,56 @@
-div.container
-  div.row
-    form role="search" action="search" method="get"
-      div class="form-group"
-        input type="text" class="form-control" placeholder="Document ID" name="queries[id]"
-      div class="form-group"
-        input type="text" class="form-control" placeholder="Search School" name="queries[school]" list="english-schools-list"
-        = render 'list_partials/english_schools'
-      div class="form-group"
-        input type="text" class="form-control" placeholder="Category" name="queries[category]" list="question_types-list"
-        = render 'list_partials/question_types'
-      div class="form-group"
-        select name="queries[subject]" class="subjectPicker" data-live-search="true" multiple="multiple" title="Select Subject"
-          - Subject.all.each do |s|
-            option value="#{s.subject}" #{s.subject}
+div.container.queries-form-container
+  h1.text-center AS Documents
+  hr
+    form role="search" action="search" method="get" class="form-horizontal"
+      div.form-group
+        div.row
+          div.col-md-8
+            input type="text" class="form-control" placeholder="Document ID" name="queries[id]"
+          div.col-md-2
+            button type="submit" class="btn btn-default"
+              span class="glyphicon glyphicon-search"  Search
+          div.col-md-1
+            button type="reset" class="btn btn-danger" id="reset-fields" Reset
 
-        / input type="text" class="form-control" placeholder="Subject" name="queries[subject]"
-      div class="form-group"
-        input type="text" class="form-control" placeholder="Grade: 1-6 (Primary) 7-12 (Secondary) 0 (Not Specified)" name="queries[grade]"
-      div class="form-group"
-        input type="text" class="form-control" placeholder="Contributor's name" name="queries[contributor]" list="students-list"
-        = render 'list_partials/students'
-      div class="form-group"
-        input type="text" class="form-control" placeholder="Term: 0 (Unspecified), 1, 2, 3" name="queries[term]"
-      div class="form-group"
-        select name="queries[format]" class="formatPicker" data-live-search="true" multiple="multiple" title="Select Format"
+      hr
 
-          - Format.all.each do |f|
-            option value="#{f.name}" #{f.name}
-        / input type="text" class="form-control" placeholder="Format: Test, Exam, Worksheet" name="queries[format]"
-      div class="form-group"
-        input type="text" class="form-control" placeholder="Year of Document" name="queries[year]"
-      div class="form-group"
-        input type="text" class="form-control" placeholder="Full-text Search: Keywords with space" name="queries[content]"
+      div.advanced-criteria
+        div.form-group
+          div.row
+            div.col-md-3
+              select name="queries[subject]" class="subjectPicker" data-live-search="true" multiple="multiple" title="Select Subject"
+                - Subject.all.each do |s|
+                  option value="#{s.subject}" #{s.subject}
+            div.col-md-3
+              input type="text" class="form-control" placeholder="Grade: 1-6 (Primary) 7-12 (Secondary) 0 (Not Specified)" name="queries[grade]"
+            div.col-md-3
+              input type="text" class="form-control" placeholder="Term: 0 (Unspecified), 1, 2, 3" name="queries[term]"
+            div.col-md-2
+              input type="text" class="form-control" placeholder="Year of Document" name="queries[year]"
 
-      button type="submit" class="btn btn-default" Search
+
+        div.form-group
+          div.row
+            div.col-md-5
+              input type="text" class="form-control" placeholder="Search School" name="queries[school]" list="english-schools-list"
+              = render 'list_partials/english_schools'
+            div.col-md-3
+              input type="text" class="form-control" placeholder="Contributor's name" name="queries[contributor]" list="students-list"
+              = render 'list_partials/students'
+
+
+
+        div.form-group
+          div.row
+            div.col-md-3
+              select name="queries[format]" class="formatPicker" data-live-search="true" multiple="multiple" title="Select Format"
+                - Format.all.each do |f|
+                  option value="#{f.name}" #{f.name}
+            div.col-md-4
+              input type="text" class="form-control" placeholder="Category" name="queries[category]" list="question_types-list"
+              = render 'list_partials/question_types'
+
+        div.form-group
+          div.row
+            div.col-md-10
+              input type="text" class="form-control" placeholder="Full-text Search: Keywords with space" name="queries[content]"
