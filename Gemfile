@@ -44,7 +44,7 @@ gem 'rqrcode_png'
 gem 'rmagick'
 gem 'delayed_job_active_record'
 gem 'autoprefixer-rails'
-gem 'searchkick'
+gem 'searchkick', '~> 0.8.5'
 gem 'yomu'
 gem 'fog'
 

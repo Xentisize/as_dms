@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'queries/results'
   # get 'print/to_printer'
   post 'print/to_printer'
+  root 'queries#index'
 
   # mount PdfjsRailsEngine::Engine, at: "pdf"
 
