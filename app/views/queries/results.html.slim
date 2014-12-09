@@ -1,5 +1,36 @@
-- if @results
-  - @results.each do |r|
-    p = r.id
-    p = r
-    / # p = r.id
+/ - if @results
+/   - @results.each do |r|
+/     p = r.id
+/     p = r
+/     / # p = r.id
+
+- if @school_document_results
+  - @school_document_results.each do |entry|
+    div.container
+      table id="school-document-result-table"
+        thead
+          tr
+            th File
+            th ID
+            th School
+            th Subject
+            th Format
+            th Year
+            th Term
+            th Grade
+            th Contributor
+            th Solution
+            th Audio
+        tbody
+          tr
+            td <a href="/school_documents/#{entry.id}"><span class="glyphicon glyphicon-file"></span></a>
+            td == entry.id
+            td == entry.school.english_name
+            td == entry.subject.subject
+            td == entry.format.name
+            td == entry.year
+            td == entry.term
+            td == entry.grade
+            td == entry.student.name
+            td Has Solution
+            td Has Audio

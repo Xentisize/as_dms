@@ -126,20 +126,27 @@ class QueriesController < ApplicationController
     # end
     logger.info "Results: #{results_ids}"
 
-    redirect_to :controller => "queries", :action => "results", :ids => results_ids
+    redirect_to :controller => "queries", :action => "results", :sd_ids => results_ids
   end
 
   def results
-    logger.info params[:ids]
-    if params[:ids]
-      @results = []
-      params[:ids].each do |r|
-        @results << SchoolDocument.find(r)
-        logger.info @results
+    if params[:sd_ids].present?
+      @school_document_results = []
+      params[:sd_ids].each do |id|
+        @school_document_results << SchoolDocument.find(r)
       end
     end
-    logger.info @results
-    @results
   end
+  #   logger.info params[:ids]
+  #   if params[:ids]
+  #     @results = []
+  #     params[:ids].each do |r|
+  #       @results << SchoolDocument.find(r)
+  #       logger.info @results
+  #     end
+  #   end
+  #   logger.info @results
+  #   @results
+  # end
 
 end
