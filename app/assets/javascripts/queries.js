@@ -28,3 +28,7 @@ $(function() {
     }
   });
 });
+
+$(function() {
+  $("#school-document-result-table").DataTable();
+});
